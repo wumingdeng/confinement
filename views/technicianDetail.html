@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="boostrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="boostrap/css/bootstrap-table.min.css">
+    <link href="boostrap/css/templatemo-style.css" rel="stylesheet">
+    <link href="boostrap/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/fileinput.min.css" rel="stylesheet">
+</head>
+
+<body style="background-color: transparent">
+<div class="templatemo-content col-1 light-gray-bg">
+    <div class="templatemo-content-widget white-bg">
+        <div class="panel panel-default no-border">
+            <div class="panel-body">
+                <form class="templatemo-login-form">
+                    <div class="row form-group">
+                        <label class="col-lg-2  control-label" style="width: 100%;">肖像上传</label>
+                        <div class="input-group-btn">
+                            <div class="btn btn-file">
+                                <input id="file-1" class="file" type="file" multiple="" data-preview-file-type="any"
+                                       data-upload-url="#" data-preview-file-icon="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">姓名</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="nm" name="nm">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">性别</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <select class="form-control">
+                                <option value="0">男</option>
+                                <option value="1">女</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">职称</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <select id="selectError" class="form-control">
+                                <option>护士</option>
+                                <option>护师</option>
+                                <option>主管护师</option>
+                                <option>副主任护师</option>
+                                <option>主任护师</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">普通认证</label>
+                        <div class="input-group-btn">
+                            <div class="btn btn-file">
+                                <input id="file-2" class="file" type="file" multiple="" data-preview-file-type="any"
+                                       data-upload-url="#" data-preview-file-icon="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">权威认证</label>
+                        <div class="input-group-btn">
+                            <div class="btn btn-file">
+                                <input id="file-3" class="file" type="file" multiple="" data-preview-file-type="any"
+                                       data-upload-url="#" data-preview-file-icon="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">地址</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="adr" name="adr">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">科室</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="rom" name="rom">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">简介</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="itr" name="itr">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">擅长</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="like" name="like">
+                        </div>
+                    </div>
+                </form>
+                <div class="form-group text-right">
+                    <button onclick="onPostForm()" class="templatemo-blue-button">保存</button>
+                    <button onclick="onRest()" class="templatemo-white-button">重置</button>
+                    <button onclick="onBack()" id="cancel" class="templatemo-white-button">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- JS -->
+<script src="boostrap/js/jquery-1.11.2.min.js"></script>
+<script src="boostrap/js/bootstrap.min.js"></script>
+<script src="boostrap/js/bootstrap-table.js"></script>
+<script src="boostrap/js/templatemo-script.js"></script>
+<script src="js/technicianDetail.js"></script>
+<script src="js/fileinput.min.js"></script>
+<script src="js/locales/zh.js"></script>
+
+</html>

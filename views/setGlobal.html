@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="boostrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="boostrap/css/bootstrap-table.min.css">
+    <link href="boostrap/css/templatemo-style.css" rel="stylesheet">
+    <link href="boostrap/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+<body style="background-color: transparent">
+<div class="templatemo-content col-1 light-gray-bg">
+    <div class="templatemo-content-widget white-bg">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form class="templatemo-login-form" id="prForm">
+                    <div class="row form-group">
+                        <div class="col-lg-2 col-md-2 form-group" style="float: left">
+                            <label for="mcr">未支付失效时间</label>
+                            <input type="text" class="form-control" data-container="body" data-toggle="popover"
+                                   data-placement="bottom" data-content="不能为空"
+                                   onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="mcr" name="mcr">
+                        </div>
+                        <div class="col-lg-2 col-md-2 form-group" style="float: left">
+                            <label for="tmct">抢单失效时间</label>
+                            <input type="text" class="form-control" data-container="body" data-toggle="popover"
+                                   data-placement="bottom" data-content="不能为空"
+                                   onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="tmct" name="tmct">
+                        </div>
+                        <div class="col-lg-2 col-md-2 form-group" style="float: left">
+                            <label for="sct">指定技师失效时间</label>
+                            <input type="text" class="form-control" data-container="body" data-toggle="popover"
+                                   data-placement="bottom" data-content="不能为空"
+                                   onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="sct" name="sct">
+                        </div>
+                        <div class="col-lg-2 col-md-2 form-group" style="float: left">
+                            <label for="bfy">人工派单失效时间</label>
+                            <input type="text" class="form-control" data-container="body" data-toggle="popover"
+                                   data-placement="bottom" data-content="不能为空"
+                                   onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="bfy" name="bfy">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-2 col-md-2 form-group" style="float: left">
+                            <label for="mcf">用户取消违约比例</label>
+                            <input type="text" class="form-control" data-container="body" data-toggle="popover"
+                                   data-placement="bottom" data-content="不能为空"
+                                   onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="mcf" name="mcf">
+                        </div>
+                        <div class="col-lg-2 col-md-2 form-group" style="float: left">
+                            <label for="bfr">抢单覆盖范围(公里)</label>
+                            <input type="text" class="form-control" data-container="body" data-toggle="popover"
+                                   data-placement="bottom" data-content="不能为空"
+                                   onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="bfr" name="bfr">
+                        </div>
+                        <div class="col-lg-2 col-md-2 form-group" style="float: left">
+                            <label for="mfr">预产期计算规则</label>
+                            <input type="text" class="form-control" data-container="body" data-toggle="popover"
+                                   data-placement="bottom" data-content="不能为空"
+                                   onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="mfr" name="mfr">
+                        </div>
+                        <div class="col-lg-2 col-md-2 form-group" style="float: left">
+                            <label for="mtcr">订单完成时间</label>
+                            <input type="text" class="form-control" data-container="body" data-toggle="popover"
+                                   data-placement="bottom" data-content="不能为空"
+                                   onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="mtcr" name="mtcr">
+                        </div>
+
+                    </div>
+                    <input type="text" class="form-control" id="cn" name="cn" style="display: none">
+                    <input type="text" class="form-control" id="isc" name="isc" style="display: none">
+
+                </form>
+
+                <div class="form-group text-right">
+                    <button onclick="onPostForm()" class="templatemo-blue-button">保存</button>
+                    <button onclick="onRest()" class="templatemo-white-button">重置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="boostrap/js/jquery-1.11.2.min.js"></script>
+<script src="boostrap/js/bootstrap.min.js"></script>
+<script src="boostrap/js/bootstrap-table.js"></script>
+<script>
+    var g_ArgPost = {} //全局参数
+    window.parent.onAutoIframeHeight()
+    $(function () {
+        $.getJSON("/manageProject/getGlobal", {}, function (argPost) {
+            g_ArgPost = argPost
+            setInputValue(argPost)
+        })
+    })
+    function setInputValue(argPost) {
+        document.getElementById("mcr").value = argPost.mcr || "";
+        document.getElementById("tmct").value = argPost.tmct || "";
+        document.getElementById("sct").value = argPost.sct || "";
+        document.getElementById("bfy").value = argPost.bfy || "";
+        document.getElementById("mcf").value = argPost.mcf || "";
+        document.getElementById("bfr").value = argPost.bfr || "";
+        document.getElementById("mfr").value = (argPost.mfr) || "";
+        document.getElementById("mtcr").value = (argPost.mtcr) || "";
+    }
+
+    function onPostForm() {
+        var postData = $('#prForm').serialize()
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: '/manageProject/saveGlobal',
+            data: postData,// 你的formid
+            async: false,
+            error: function (request) {
+                alert("Connection error");
+            },
+            success: function (data) {
+                if (data.ok == 1) {
+                    g_ArgPost = data.d
+                    alert('保存成功')
+                }
+            }
+        });
+    }
+
+    //复写重置方法
+    function onRest() {
+        setInputValue(g_ArgPost)
+    }
+</script>
+
+</body>
+</html>

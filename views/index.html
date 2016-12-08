@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="boostrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="boostrap/css/bootstrap-table.min.css">
+    <link href="boostrap/css/templatemo-style.css" rel="stylesheet">
+    <link href="boostrap/css/font-awesome.min.css" rel="stylesheet">
+    <link rel='stylesheet' , href='css/qunit-1.22.0.css'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <![endif]-->
+</head>
+<body>
+<div class="templatemo-flex-row">
+    <div class="templatemo-sidebar" style="width: 20%;float: left" >
+
+        <div class="mobile-menu-icon">
+            <i class="fa fa-bars"></i>
+        </div>
+        <nav class="templatemo-left-nav">
+            <ul>
+                <li><a href="setDisplay" onClick="onSelectMenu(this)" class="active" target="ifr" id="li_1"><i
+                        class="fa fa-eject fa-fw"></i>显示配置</a></li>
+                <li><a href="setGlobal" onClick="onSelectMenu(this)" target="ifr" id="li_2"><i
+                        class="fa fa-eject fa-fw"></i>参数配置</a></li>
+                <li><a href="setTechnician" onClick="onSelectMenu(this)" target="ifr" id="li_3"><i
+                        class="fa fa-eject fa-fw"></i>技师维护</a></li>
+                <li><a href="setService" onClick="onSelectMenu(this)" target="ifr" id="li_4"><i
+                        class="fa fa-eject fa-fw"></i>服务项目维护</a></li>
+                <li><a href="setOrder" onClick="onSelectMenu(this)" target="ifr" id="li_5"><i
+                        class="fa fa-eject fa-fw"></i>订单管理</a></li>
+                <li><a href="/?clear=0" onClick="onSelectMenu(this)" id="li_6"><i class="fa fa-eject fa-fw"></i>退出</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!-- Main content -->
+    <div class="templatemo-content col-1 light-gray-bg" id="bodyDiv" style="width: 80%;float: right">
+        <div class="templatemo-top-nav-container">
+            <div class="row">
+                <nav class="templatemo-top-nav col-lg-12 col-md-12">
+                    <img src="logo.png" align="center" alt="Profile Photo" class="img-responsive">
+                </nav>
+            </div>
+        </div>
+        <iframe src="" style="width: 100%" frameBorder=0 scrolling=no id="ifr" name="ifr"></iframe>
+    </div>
+    <div class="modal fade" id="loading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="panel-heading"><h2 class="text-uppercase">加载过程中.......</h2></div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</div>
+
+<script src="boostrap/js/jquery.min.js"></script>
+<script src="boostrap/js/bootstrap.min.js"></script>
+<script src="boostrap/js/bootstrap-table.js"></script>
+<script src="js/webLogic.js"></script>
+<script src="boostrap/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+<script src="js/cookieUnit.js"></script>
+<script>
+    var _self
+    $(function () {
+        window['ifr'].location.href = "/setDisplay"
+        _self = $(this)
+
+    });
+    var selectedMeun = $('#li_1')
+    function onSelectMenu(_this) {
+        var id = _this.id;
+        if (selectedMeun == $('#' + id)) return
+
+        selectedMeun.attr("class", "")
+        $('#' + id).attr("class", "active")
+        selectedMeun = $('#' + id)
+    }
+    function onAutoIframeHeight(height) {
+        if(height){
+            $('#ifr').height(height);
+        }else {
+            var mainheight = _self.contents().find("body").height() + 50;
+            $('#ifr').height(mainheight);
+        }
+    }
+    function onCreateProject() {
+        window['ifr'].location.href = 'modify-project?isc=1'
+    }
+    var t1 = 0
+    function onLoading(turn) {
+        if (turn == "show") {
+            document.getElementById("ifr").style.display = 'none'
+            t1 = setInterval(function () {
+                $('#loading').modal(turn)
+            }, 2000);
+        } else {
+            document.getElementById("ifr").style.display = 'block'
+            window.clearTimeout(t1);//去掉定时器
+            $('#loading').modal(turn)
+            t1 = 0
+        }
+    }
+</script>
+</body>
+</html>
