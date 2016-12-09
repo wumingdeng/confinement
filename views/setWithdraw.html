@@ -15,21 +15,19 @@
         <div class="templatemo-content-widget white-bg no-border">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3>技师列表</h3>
-                    <table id="technicianTable" class="table table-striped table-bordered templatemo-user-table"
+                    <h3>技师提现管理</h3>
+                    <table id="manageWithdrawTable" class="table table-striped table-bordered templatemo-user-table"
                            data-toggle="table"
                            data-page-list="[10]"
                            data-pagination="true"
                            data-height="auto">
                         <thead>
                         <tr>
-                            <th data-field="id">技师ID</th>
-                            <th data-field="name">技师名称</th>
-                            <th data-field="tj" data-formatter="tjFormatter">是否推荐</th>
-                            <th data-field="as" data-formatter="asFormatter">审核状态</th>
-                            <th data-field="us" data-formatter="usFormatter">账号状态</th>
-                            <th data-field="dt" data-formatter="rtFormatter">注册时间</th>
-                            <th data-field="at" data-formatter="atFormatter">最新审批时间</th>
+                            <th data-field="id">提现Id</th>
+                            <th data-field="tId">技师ID</th>
+                            <th data-field="tName">技师名称</th>
+                            <th data-field="rmb" data-formatter="rmbFormatter">提现金额</th>
+                            <th data-field="ot" data-formatter="tFormatter">申请时间</th>
                             <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">操作
                             </th>
                         </tr>
@@ -38,33 +36,37 @@
                 </div>
             </div>
             <!-- 模态框（Modal） -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            <div class="modal fade" id="alertSumbmit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="panel-heading"><h2 class="text-uppercase">是否确定删除该技师</h2></div>
+                        <div class="panel-heading"><h2 class="text-uppercase" id="alertText"></h2></div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" id="deleteCommit">确定</button>
+                            <button type="button" class="btn btn-primary" id="submitAlert">确定</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal -->
             </div>
+
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3>技师的订单结算记录</h3>
-                    <table id="countList" class="table table-striped table-bordered templatemo-user-table"
+                    <h3>提现记录</h3>
+                    <table id="withdrawList" class="table table-striped table-bordered templatemo-user-table"
                            data-toggle="table"
                            data-page-list="[10]"
                            data-pagination="true"
                            data-height="auto">
                         <thead>
                         <tr>
-                            <th data-field="tId">技师ID</th>
-                            <th data-field="oId">订单ID</th>
+                            <th data-field="id">提现ID</th>
                             <th data-field="rmb" data-formatter="rmbFormatter">转入金额</th>
+                            <th data-field="tId">技师ID</th>
+                            <th data-field="tName">技师名称</th>
+                            <th data-field="state">状态</th>
                             <th data-field="author">操作人</th>
-                            <th data-field="ot" data-formatter="rtFormatter">结算时间</th>
+                            <th data-field="pt" data-formatter="tFormatter">审批时间</th>
+                            <th data-field="ot" data-formatter="tFormatter">申请时间</th>
                         </tr>
                         </thead>
                     </table>
@@ -80,6 +82,6 @@
 <script src="boostrap/bootstrap-table-zh-CN.js"></script>
 <script src="boostrap/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 <script src="js/cookieUnit.js"></script>
-<script src="js/technician.js"></script>
+<script src="js/withdraw.js"></script>
 </body>
 </html>

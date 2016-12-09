@@ -34,6 +34,14 @@ router.get('/setOrder', function(req, res, next) {
   res.render('setOrder', { title: 'Express' });
 });
 
+router.get('/setWithdraw', function(req, res, next) {
+  res.render('setWithdraw', { title: 'Express' });
+});
+
+router.get('/setCount', function(req, res, next) {
+  res.render('setCount', { title: 'Express' });
+});
+
 router.get('/out', function(req, res, next) {
   res.render('login', { title: 'Express' });
 });

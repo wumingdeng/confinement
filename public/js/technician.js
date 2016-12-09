@@ -4,12 +4,12 @@
 
 
 $(function () {
-    window.parent.onAutoIframeHeight() //设置Iframe的高度
-//        $('#table').bootstrapTable('destroy')
-    $('#table').bootstrapTable({
+    window.parent.onAutoIframeHeight(1000) //设置Iframe的高度
+    $('#technicianTable').bootstrapTable('destroy')
+    $('#technicianTable').bootstrapTable({
         method: 'get',
-        url: '/manageProject/getProject',
-        sidePagination: "server",
+        url: '/dataJson/technician.json',
+        // sidePagination: "server",
         dataType: "json",
         pageSize:  10,
         striped: true,
@@ -18,13 +18,15 @@ $(function () {
         onResetView: function () {
         },
         onClickCell: function (field, value, row, $element) {
-            if (field == "pn" || field == "cn" || field == "dt" || field == "_id") {
-                window.parent.onLoading("show")
-                var myurl = "technicianDetail?name=" + row.pn;
-                window.location.assign(encodeURI(myurl));
+            if (field == "us" || field == "name" || field == "dt" || field == "id" || field == "as" || field == "tj" || field == "at") {
+                // window.parent.onLoading("show")
+                // var myurl = "technicianDetail?name=" + row.pn;
+                // window.location.assign(encodeURI(myurl));
+                findCountByTechnicianID(row.id)
             }
         }
     })
+    
     $('#cpyCommit').click(function () {
         $.ajax({
             cache: true,
@@ -41,7 +43,24 @@ $(function () {
         });
     })
 });
-
+function findCountByTechnicianID(tid){
+    $('#countList').bootstrapTable('destroy')
+    $('#countList').bootstrapTable({
+        method: 'get',
+        url: '/dataJson/count.json',
+        // sidePagination: "server",
+        dataType: "json",
+        pageSize:  10,
+        striped: true,
+        onLoadSuccess: function () {
+            
+            window.parent.onLoading("hide")
+            window.parent.document.documentElement.scrollTop = window.parent.document.body.scrollTop = 1000
+        },
+        onResetView: function () {
+        }
+    })
+}
 function onSuccess(row) {
     $('#table').bootstrapTable('remove', {
         field: '_id',
@@ -85,6 +104,10 @@ function tjFormatter(value,row,index){
         default:
             return "";
     }
+}
+
+function rmbFormatter(value,row,index){
+    return "￥"+ value +"元"
 }
 function operateFormatter(value, row, index) {
     var qz = getCookie('right')

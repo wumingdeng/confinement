@@ -16,7 +16,7 @@
         <div class="templatemo-content-widget white-bg no-border">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3>派发订单管理</h3>
+                    <h3>订单管理</h3>
                     <table id="orderTable" class="table table-striped table-bordered templatemo-user-table"
                            data-toggle="table"
                            data-page-list="[10]"
@@ -27,8 +27,9 @@
                             <th data-field="id">订单ID</th>
                             <th data-field="rmb" data-formatter="rmbFormatter">费用</th>
                             <th data-field="sName">服务名称</th>
-                            <th data-field="sAdr">服务地址</th>
-                            <th data-field="conect" data-formatter="conectFormatter">联系方式</th>
+                            <th data-field="tId">技师ID</th>
+                            <th data-field="tName">技师名称</th>
+                            <th data-field="star">星级评价</th>
                             <th data-field="state" data-formatter="sFormatter">状态</th>
                             <th data-field="ot" data-formatter="tFormatter">下单时间</th>
                             <th data-field="operate" data-formatter="operateFormatter"
@@ -53,60 +54,49 @@
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal -->
             </div>
-
-            <div class="modal fade" id="changeTechnician" tabindex="-2" role="dialog">
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="pushRmb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="panel-heading"><h2 class="text-uppercase">选择技师</h2></div>
+                        <div class="panel-heading"><h2 class="text-uppercase">转入金额</h2></div>
                         <div class="panel-body">
-                            <form action="index.html" class="templatemo-login-form">
-                                <div class="form-group">
-                                    <label for="inputName">姓名</label>
-                                    <input type="text" class="form-control" id="inputName"
-                                           placeholder="输入姓名">
+                            <div class="row form-group">
+                                <label class="col-lg-2 control-label" style="width: 100%;">输入金额</label>
+                                <div class="col-lg-12 col-md-12 form-group">
+                                    <input type="text" class="form-control"
+                                           onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="rmb"
+                                           name="rmb">
                                 </div>
-                                <div class="form-group">
-                                    闲置:
-                                    <select id="free">
-                                        <option value="0">是</option>
-                                        <option value="1">否</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    擅长:
-                                    <select id="selectRight">
-                                        <option value="0">通乳</option>
-                                        <option value="1">少奶</option>
-                                    </select>
-                                </div>
-                                <button type="button" class="btn btn-default" id="searchT">搜索</button>
-                            </form>
-                            <div class="panel-body">
-                                <h4>双击列表选择技师</h4>
-                                <table id="tTable"
-                                       class="table table-striped table-bordered templatemo-user-table"
-                                       data-toggle="table"
-                                       data-page-list="[10]"
-                                       data-pagination="true"
-                                       data-height="auto">
-                                    <thead>
-                                    <tr>
-                                        <th data-field="id">技师ID</th>
-                                        <th data-field="name">技师名称</th>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                </table>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <!--<button type="button" class="btn btn-primary" id="changeT">确定</button>-->
+                            <button type="button" class="btn btn-primary" id="pushRmbCommit">确定</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal -->
             </div>
-
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>订单完成的结算记录</h3>
+                    <table id="countList" class="table table-striped table-bordered templatemo-user-table"
+                           data-toggle="table"
+                           data-page-list="[10]"
+                           data-pagination="true"
+                           data-height="auto">
+                        <thead>
+                        <tr>
+                            <th data-field="oId">订单ID</th>
+                            <th data-field="rmb" data-formatter="rmbFormatter">转入金额</th>
+                            <th data-field="tId">技师ID</th>
+                            <th data-field="author">操作人</th>
+                            <th data-field="ot" data-formatter="tFormatter">结算时间</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -117,6 +107,6 @@
 <script src="boostrap/bootstrap-table-zh-CN.js"></script>
 <script src="boostrap/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 <script src="js/cookieUnit.js"></script>
-<script src="js/order.js"></script>
+<script src="js/count.js"></script>
 </body>
 </html>

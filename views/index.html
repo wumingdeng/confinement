@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="boostrap/css/bootstrap-table.min.css">
     <link href="boostrap/css/templatemo-style.css" rel="stylesheet">
     <link href="boostrap/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/fileinput.min.css" rel="stylesheet">
     <link rel='stylesheet' , href='css/qunit-1.22.0.css'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -32,8 +33,12 @@
                 <li><a href="setService" onClick="onSelectMenu(this)" target="ifr" id="li_4"><i
                         class="fa fa-eject fa-fw"></i>服务项目维护</a></li>
                 <li><a href="setOrder" onClick="onSelectMenu(this)" target="ifr" id="li_5"><i
-                        class="fa fa-eject fa-fw"></i>订单管理</a></li>
-                <li><a href="/?clear=0" onClick="onSelectMenu(this)" id="li_6"><i class="fa fa-eject fa-fw"></i>退出</a>
+                        class="fa fa-eject fa-fw"></i>派发订单</a></li>
+                <li><a href="setCount" onClick="onSelectMenu(this)" target="ifr" id="li_6"><i
+                        class="fa fa-eject fa-fw"></i>订单结算</a></li>
+                <li><a href="setWithdraw" onClick="onSelectMenu(this)" target="ifr" id="li_7"><i
+                        class="fa fa-eject fa-fw"></i>提现管理</a></li>
+                <li><a href="/?clear=0" onClick="onSelectMenu(this)" id="li_8"><i class="fa fa-eject fa-fw"></i>退出</a>
                 </li>
             </ul>
         </nav>
@@ -65,6 +70,8 @@
 <script src="js/webLogic.js"></script>
 <script src="boostrap/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 <script src="js/cookieUnit.js"></script>
+<script src="js/fileinput.min.js"></script>
+<script src="js/locales/zh.js"></script>
 <script>
     var _self
     $(function () {
