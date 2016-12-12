@@ -20,6 +20,12 @@ router.get('/setTechnician', function(req, res, next) {
 
 router.get('/technicianDetail', function(req, res, next) {
   res.render('technicianDetail', { title: 'Express' });
+  // res.render('technicianDetail', { title: 'Express' });
+});
+
+router.get('/modifyTechnician', function(req, res, next) {
+  res.render('modifyTechnician', { title: 'Express' });
+  // res.render('technicianDetail', { title: 'Express' });
 });
 
 router.get('/serviceDetail', function(req, res, next) {

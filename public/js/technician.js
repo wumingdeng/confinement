@@ -17,7 +17,7 @@ $(function () {
         },
         onResetView: function () {
         },
-        onClickCell: function (field, value, row, $element) {
+        onDblClickRow: function (row, $element, field) {
             if (field == "us" || field == "name" || field == "dt" || field == "id" || field == "as" || field == "tj" || field == "at") {
                 // window.parent.onLoading("show")
                 // var myurl = "technicianDetail?name=" + row.pn;
@@ -134,13 +134,13 @@ window.operateEvents = {
         })
     },
     'click .enter': function (e, value, row, index) {
-        window.parent.onLoading("show")
+        // window.parent.onLoading("show")
         var myurl = "technicianDetail?name=" + row.id;
         window.location.assign(encodeURI(myurl));
 
     },
     'click .RoleOfEdit': function (e, value, row, index) {
-       var myurl = "technicianDetail?name=" + row.id;
+       var myurl = "modifyTechnician?name=" + row.id;
         window.location.assign(encodeURI(myurl));
     }
 };

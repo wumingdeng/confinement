@@ -26,7 +26,7 @@ $(function() {
         $('#tTable').bootstrapTable('destroy')
         $('#tTable').bootstrapTable({
             method: 'get',
-            url: '/dataJson/technician.json',
+            url: '/dataJson/order.json',
             // sidePagination: "server",
             dataType: "json",
             pageSize:  10,
@@ -35,13 +35,11 @@ $(function() {
             },
             onResetView: function () {
             },
-            onClickCell: function (field, value, row, $element) {
-                if (field == "id" || field == "name") {
-                    window.parent.document.documentElement.scrollTop = window.parent.document.body.scrollTop = 0
-                    $('#changeTechnician').modal('hide')
-                    document.getElementById("sendTN").innerHTML ="你确定为"+ row.name+"派发该订单";
-                    $("#alertSumbmit").modal('show')
-                }
+            onDblClickRow: function (row, $element, field) {
+                window.parent.document.documentElement.scrollTop = window.parent.document.body.scrollTop = 0
+                $('#changeTechnician').modal('hide')
+                document.getElementById("sendTN").innerHTML ="你确定为"+ row.name+"派发该订单";
+                $("#alertSumbmit").modal('show')
             }
         })
     })

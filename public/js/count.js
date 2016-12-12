@@ -18,10 +18,10 @@ $(function() {
         },
         onResetView: function () {
         },
-        onClickCell: function (field, value, row, $element) {
-            if (field == "id" || field == "name") {
+        onDblClickRow: function (row, $element, field) {
+            // if (field == "id" || field == "name") {
                 findCountByOrderId(row.id)
-            }
+            // }
 
         }
     })

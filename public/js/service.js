@@ -17,7 +17,7 @@ $(function () {
         },
         onResetView: function () {
         },
-        onClickCell: function (field, value, row, $element) {
+        onDblClickRow: function (row, $element, field){
             if (field == "pn" || field == "cn" || field == "dt" || field == "_id") {
                 window.parent.onLoading("show")
                 var myurl = "serviceDetail?name=" + row.pn;
