@@ -17,23 +17,19 @@
                 <div class="panel-body">
                     <table id="table" class="table table-striped table-bordered templatemo-user-table"
                            data-toggle="table"
-                           data-page-list="[10, 25, 50, 100, ALL]"
+                           data-page-list="[10]"
                            data-pagination="true"
-                           data-url="/dataJson/service.json"
                            data-height="auto">
                         <thead>
                         <tr>
                             <th data-field="id">服务项目ID</th>
                             <th data-field="name">服务名称</th>
-                            <th data-field="tj">服务内容</th>
-                            <th data-field="as" data-formatter="rmbFormatter">服务费用</th>
-                            <th data-field="us" data-formatter="groupFormatter">适用人群</th>
-                            <!--<th data-field="dt" >服务介绍</th>-->
-                            <!--<th data-field="at" >服务步骤</th>-->
-                            <th data-field="at">服务时长</th>
-                            <!--<th data-field="at" >中途取消服务说明</th>-->
-                            <th data-field="at">服务范围</th>
-                            <!--<th data-field="at" >服务承若</th>-->
+                            <th data-field="desc_content">服务内容</th>
+                            <th data-field="origin_price" data-formatter="rmbFormatter">服务费用</th>
+                            <th data-field="cur_price" data-formatter="rmbFormatter">服务费用</th>
+                            <th data-field="desc_fit" data-formatter="groupFormatter">适用人群</th>
+                            <th data-field="desc_service_time">服务时长</th>
+                            <th data-field="desc_service_scale">服务范围</th>
                             <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">操作
                             </th>
                         </tr>

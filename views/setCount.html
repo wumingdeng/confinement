@@ -25,13 +25,17 @@
                         <thead>
                         <tr>
                             <th data-field="id">订单ID</th>
-                            <th data-field="rmb" data-formatter="rmbFormatter">费用</th>
-                            <th data-field="sName">服务名称</th>
-                            <th data-field="tId">技师ID</th>
+                            <th data-field="userid">用户id</th>
+                            <th data-field="actualpay" data-formatter="rmbFormatter">费用</th>
+                            <th data-field="price" data-formatter="rmbFormatter">价格</th>
+                            <th data-field="service">服务名称</th>
+                            <th data-field="workerid">技师ID</th>
                             <th data-field="tName">技师名称</th>
                             <th data-field="star">星级评价</th>
-                            <th data-field="state" data-formatter="sFormatter">状态</th>
-                            <th data-field="ot" data-formatter="tFormatter">下单时间</th>
+                            <th data-field="status" data-formatter="sFormatter">状态</th>
+                            <th data-field="createtime" data-formatter="tFormatter">下单时间</th>
+                            <th data-field="startat" data-formatter="tFormatter">开始服务时间</th>
+                            <th data-field="finishat" data-formatter="tFormatter">订单完成时间</th>
                             <th data-field="operate" data-formatter="operateFormatter"
                                 data-events="operateEvents">操作
                             </th>

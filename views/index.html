@@ -14,6 +14,7 @@
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <![endif]-->
+
 </head>
 <body>
 <div class="templatemo-flex-row">
@@ -32,10 +33,19 @@
                         class="fa fa-eject fa-fw"></i>技师维护</a></li>
                 <li><a href="setService" onClick="onSelectMenu(this)" target="ifr" id="li_4"><i
                         class="fa fa-eject fa-fw"></i>服务项目维护</a></li>
-                <li><a href="setOrder" onClick="onSelectMenu(this)" target="ifr" id="li_5"><i
-                        class="fa fa-eject fa-fw"></i>派发订单</a></li>
-                <li><a href="setCount" onClick="onSelectMenu(this)" target="ifr" id="li_6"><i
-                        class="fa fa-eject fa-fw"></i>订单结算</a></li>
+                <!--<li><a href="setOrder" onClick="onSelectMenu(this)" target="ifr" id="li_5"><i-->
+                        <!--class="fa fa-eject fa-fw"></i>派发订单</a></li>-->
+                <!--<li><a href="setCount" onClick="onSelectMenu(this)" target="ifr" id="li_6"><i-->
+                        <!--class="fa fa-eject fa-fw"></i>订单结算</a></li>-->
+                <li class="accordion">
+                    <a href="#" onclick="displayOrder(this)"><i class="glyphicon glyphicon-plus" style="margin-right: 15px"></i><span>订单管理</span></a>
+                    <ul id = "am1" class="nav nav-pills nav-stacked" style="display: none">
+                        <li><a href="setOrder"  onClick="onSelectMenu(this)" target="ifr" id="li_5"><i
+                                class="fa fa-eject fa-fw" style="margin-left: 40px"></i>派发订单</a></li>
+                        <li><a href="setCount"  onClick="onSelectMenu(this)" target="ifr" id="li_6"><i
+                                class="fa fa-eject fa-fw" style="margin-left: 40px"></i>订单结算</a></li>
+                    </ul>
+                </li>
                 <li><a href="setWithdraw" onClick="onSelectMenu(this)" target="ifr" id="li_7"><i
                         class="fa fa-eject fa-fw"></i>提现管理</a></li>
                 <li><a href="/?clear=0" onClick="onSelectMenu(this)" id="li_8"><i class="fa fa-eject fa-fw"></i>退出</a>
@@ -79,6 +89,17 @@
         _self = $(this)
 
     });
+    var orderOpen = false
+    function displayOrder(_this){
+        onSelectMenu(_this)
+        if(orderOpen) {
+            orderOpen = false
+            document.getElementById("am1").style.display = 'none'
+        }else {
+            orderOpen = true
+            document.getElementById("am1").style.display = 'block'
+        }
+    }
     var selectedMeun = $('#li_1')
     function onSelectMenu(_this) {
         var id = _this.id;

@@ -4,12 +4,12 @@
 
 
 $(function () {
-    window.parent.onAutoIframeHeight() //设置Iframe的高度
-//        $('#table').bootstrapTable('destroy')
+    window.parent.onAutoIframeHeight(800) //设置Iframe的高度
+    $('#table').bootstrapTable('destroy')
     $('#table').bootstrapTable({
         method: 'get',
-        url: '/manageProject/getProject',
-        sidePagination: "server",
+        url: '/dataJson/service.json',
+        // sidePagination: "server",
         dataType: "json",
         pageSize:  10,
         striped: true,
@@ -18,32 +18,15 @@ $(function () {
         onResetView: function () {
         },
         onDblClickRow: function (row, $element, field){
-            if (field == "pn" || field == "cn" || field == "dt" || field == "_id") {
-                window.parent.onLoading("show")
-                var myurl = "serviceDetail?name=" + row.pn;
-                window.location.assign(encodeURI(myurl));
-            }
+            window.parent.onLoading("show")
+            var myurl = "serviceDetail?name=" + row.name;
+            window.location.assign(encodeURI(myurl));
         }
     })
     $("#addNew").click(function () {
        var myurl = "serviceDetail";
         window.location.assign(encodeURI(myurl));
     })
-
-    function initFileInput(ctrlName, uploadUrl) {
-        var control = $('#' + ctrlName);
-
-        control.fileinput({
-            language: 'zh', //设置语言
-            uploadUrl: uploadUrl, //上传的地址
-            allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀
-            showUpload: false, //是否显示上传按钮
-            showCaption: false,//是否显示标题
-            browseClass: "btn btn-primary", //按钮样式
-            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-        });
-    }
-    initFileInput("file-Portrait", "/User/EditPortrait");
 });
 
 
@@ -87,11 +70,11 @@ window.operateEvents = {
     'click .RoleOfA': function (e, value, row, index) {
         $('#myModal').modal('show')
         $('#deleteCommit').click(function () {
-            $.getJSON('/manageProject/deleteProject', {_id: row._id, pn: row.pn}, onSuccess(row))
+            $.getJSON('/manageProject/deleteProject', {_id: row._id, name: row.name}, onSuccess(row))
         })
     },
     'click .RoleOfEdit': function (e, value, row, index) {
-        var myurl = "serviceDetail?name=" + row.id;
+        var myurl = "serviceDetail?name=" + row.name;
         window.location.assign(encodeURI(myurl));
     }
 };
