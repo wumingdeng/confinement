@@ -36,12 +36,20 @@ router.get('/setService', function(req, res, next) {
   res.render('setService', { title: 'Express' });
 });
 
+router.get('/orderList', function(req, res, next) {
+  res.render('orderList', { title: 'Express' });
+});
+
 router.get('/setOrder', function(req, res, next) {
   res.render('setOrder', { title: 'Express' });
 });
 
-router.get('/setWithdraw', function(req, res, next) {
-  res.render('setWithdraw', { title: 'Express' });
+router.get('/withdrawList', function(req, res, next) {
+  res.render('withdrawList', { title: 'Express' });
+});
+
+router.get('/withdrawApproval', function(req, res, next) {
+  res.render('withdrawApproval', { title: 'Express' });
 });
 
 router.get('/setCount', function(req, res, next) {

@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="templatemo-flex-row">
-    <div class="templatemo-sidebar" style="width: 20%;float: left" >
+    <div class="templatemo-sidebar" style="width: 15%;float: left" >
 
         <div class="mobile-menu-icon">
             <i class="fa fa-bars"></i>
@@ -33,22 +33,27 @@
                         class="fa fa-eject fa-fw"></i>技师维护</a></li>
                 <li><a href="setService" onClick="onSelectMenu(this)" target="ifr" id="li_4"><i
                         class="fa fa-eject fa-fw"></i>服务项目维护</a></li>
-                <!--<li><a href="setOrder" onClick="onSelectMenu(this)" target="ifr" id="li_5"><i-->
-                        <!--class="fa fa-eject fa-fw"></i>派发订单</a></li>-->
-                <!--<li><a href="setCount" onClick="onSelectMenu(this)" target="ifr" id="li_6"><i-->
-                        <!--class="fa fa-eject fa-fw"></i>订单结算</a></li>-->
                 <li class="accordion">
-                    <a href="#" onclick="displayOrder(this)"><i class="glyphicon glyphicon-plus" style="margin-right: 15px"></i><span>订单管理</span></a>
+                    <a href="#" onclick="displayOrder(this,1)"><i class="glyphicon glyphicon-plus" style="margin-right: 15px"></i><span>订单管理</span></a>
                     <ul id = "am1" class="nav nav-pills nav-stacked" style="display: none">
-                        <li><a href="setOrder"  onClick="onSelectMenu(this)" target="ifr" id="li_5"><i
+                        <li><a href="orderList"  onClick="onSelectMenu(this)" target="ifr" id="li_5"><i
+                                class="fa fa-eject fa-fw" style="margin-left: 40px"></i>订单列表</a></li>
+                        <li><a href="setOrder"  onClick="onSelectMenu(this)" target="ifr" id="li_6"><i
                                 class="fa fa-eject fa-fw" style="margin-left: 40px"></i>派发订单</a></li>
-                        <li><a href="setCount"  onClick="onSelectMenu(this)" target="ifr" id="li_6"><i
+                        <li><a href="setCount"  onClick="onSelectMenu(this)" target="ifr" id="li_7"><i
                                 class="fa fa-eject fa-fw" style="margin-left: 40px"></i>订单结算</a></li>
                     </ul>
                 </li>
-                <li><a href="setWithdraw" onClick="onSelectMenu(this)" target="ifr" id="li_7"><i
-                        class="fa fa-eject fa-fw"></i>提现管理</a></li>
-                <li><a href="/?clear=0" onClick="onSelectMenu(this)" id="li_8"><i class="fa fa-eject fa-fw"></i>退出</a>
+                <li class="accordion">
+                    <a href="#" onclick="displayOrder(this,2)"><i class="glyphicon glyphicon-plus" style="margin-right: 15px"></i><span>提现管理</span></a>
+                    <ul id = "am2" class="nav nav-pills nav-stacked" style="display: none">
+                        <li><a href="withdrawList"  onClick="onSelectMenu(this)" target="ifr" id="li_8"><i
+                                class="fa fa-eject fa-fw" style="margin-left: 40px"></i>提现记录</a></li>
+                        <li><a href="withdrawAPProval"  onClick="onSelectMenu(this)" target="ifr" id="li_9"><i
+                                class="fa fa-eject fa-fw" style="margin-left: 40px"></i>提现审核</a></li>
+                    </ul>
+                </li>
+                <li><a href="/?clear=0" onClick="onSelectMenu(this)" id="li_10"><i class="fa fa-eject fa-fw"></i>退出</a>
                 </li>
             </ul>
         </nav>
@@ -58,7 +63,8 @@
         <div class="templatemo-top-nav-container">
             <div class="row">
                 <nav class="templatemo-top-nav col-lg-12 col-md-12">
-                    <img src="logo.png" align="center" alt="Profile Photo" class="img-responsive">
+                    <!--<img src="logo.png" align="center" alt="Profile Photo" class="img-responsive">-->
+                    <h1>月子廋到家</h1>
                 </nav>
             </div>
         </div>
@@ -89,15 +95,15 @@
         _self = $(this)
 
     });
-    var orderOpen = false
-    function displayOrder(_this){
+    var orderOpen = [false,false,false]
+    function displayOrder(_this,index){
         onSelectMenu(_this)
-        if(orderOpen) {
-            orderOpen = false
-            document.getElementById("am1").style.display = 'none'
+        if(orderOpen[index]) {
+            orderOpen[index] = false
+            document.getElementById("am"+index).style.display = 'none'
         }else {
-            orderOpen = true
-            document.getElementById("am1").style.display = 'block'
+            orderOpen[index] = true
+            document.getElementById("am"+index).style.display = 'block'
         }
     }
     var selectedMeun = $('#li_1')

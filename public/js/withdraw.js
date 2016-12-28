@@ -1,5 +1,5 @@
 $(function(){
-    window.parent.onAutoIframeHeight(1300)
+    window.parent.onAutoIframeHeight(750)
     $("#submitAlert").click(function(){
         loadWithdraw()
         

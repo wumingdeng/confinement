@@ -72,7 +72,7 @@ function sFormatter(value, row, index){
 }
 
 function conectFormatter(value, row, index){
-    return row.name+": "+row.cp
+    return row.name+": "+row.conect
 }
 
 function operateFormatter(value, row, index) {

@@ -59,9 +59,6 @@ function inputFormatter1(dataFile,index){
     if(servicesData && servicesData[index]){
         val = servicesData[index][dataFile] || ""
     }
-    // if(!value){
-    //     value = ""
-    // }
     return "<input type='text' class='form-control' data-container='body' data-toggle='popover' data-placement='bottom' onkeyup='filterStr(this)' data-content='不能为空' style='width: 100%' value='"+val+"' id='"+_id+"' name='"+_id+"'>"
 }
 function k1Formatter(value, row, index){
@@ -155,19 +152,4 @@ function setCarYearTableView(argData){
             break
         }
     }
-}
-function setXsTableView(argData){
-    var rowData = [{name:"车型折算系数"},{name:"里程折算系数"},{name:"收费标准"}]
-    for(var idx in rowData){
-        rowData[idx]['xsk1'] = argData['xsk1_'+idx]
-        rowData[idx]['xsk2'] = argData['xsk2_'+idx]
-        rowData[idx]['xsk3'] = argData['xsk3_'+idx]
-        rowData[idx]['xsk4'] = argData['xsk4_'+idx]
-        rowData[idx]['xsh1'] = argData['xsh1_'+idx]
-        rowData[idx]['xsh2'] = argData['xsh2_'+idx]
-        rowData[idx]['xsh3'] = argData['xsh3_'+idx]
-        rowData[idx]['xsh4'] = argData['xsh4_'+idx]
-        rowData[idx]['xsh5'] = argData['xsh5_'+idx]
-    }
-    $('#xsTable').bootstrapTable('load',rowData);
 }
