@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="boostrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="boostrap/css/bootstrap-table.css">
+    <link href="boostrap/css/templatemo-style.css" rel="stylesheet">
+    <link href="boostrap/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/modalExtra.css" rel="stylesheet">
+</head>
+<body style="background-color: transparent">
+
+<div class="templatemo-flex-row">
+    <div class="templatemo-content col-1 light-gray-bg">
+        <div class="templatemo-content-widget white-bg no-border">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>订单的结算记录</h3>
+                    <table id="countList" class="table table-striped table-bordered templatemo-user-table"
+                           data-toggle="table"
+                           data-page-list="[10]"
+                           data-pagination="true"
+                           data-height="auto">
+                        <thead>
+                        <tr>
+                            <th data-field="oId">订单ID</th>
+                            <th data-field="rmb" data-formatter="rmbFormatter">转入金额</th>
+                            <th data-field="tId">技师ID</th>
+                            <th data-field="author">操作人</th>
+                            <th data-field="ot" data-formatter="tFormatter">结算时间</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="boostrap/js/jquery.min.js"></script>
+<script src="boostrap/js/bootstrap.min.js"></script>
+<script src="boostrap/js/bootstrap-table.js"></script>
+<script src="boostrap/bootstrap-table-zh-CN.js"></script>
+<script src="boostrap/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+<script src="js/cookieUnit.js"></script>
+<script src="js/countList.js"></script>
+</body>
+</html>

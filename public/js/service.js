@@ -13,13 +13,14 @@ $(function () {
         dataType: "json",
         pageSize:  10,
         striped: true,
+        showColumns:true,
         onLoadSuccess: function () {
         },
         onResetView: function () {
         },
         onDblClickRow: function (row, $element, field){
             window.parent.onLoading("show")
-            var myurl = "serviceDetail?name=" + row.name;
+            var myurl = "serviceDetail?id=" + row.id;
             window.location.assign(encodeURI(myurl));
         }
     })
@@ -74,7 +75,7 @@ window.operateEvents = {
         })
     },
     'click .RoleOfEdit': function (e, value, row, index) {
-        var myurl = "serviceDetail?name=" + row.name;
+        var myurl = "serviceDetail?id=" + row.id;
         window.location.assign(encodeURI(myurl));
     }
 };

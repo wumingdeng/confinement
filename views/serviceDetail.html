@@ -1,138 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="boostrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="boostrap/css/bootstrap-table.min.css">
-  <link href="boostrap/css/templatemo-style.css" rel="stylesheet">
-  <link href="boostrap/css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/fileinput.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="boostrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="boostrap/css/bootstrap-table.min.css">
+    <link href="boostrap/css/templatemo-style.css" rel="stylesheet">
+    <link href="boostrap/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/fileinput.min.css" rel="stylesheet">
+    <link rel='stylesheet' , href='css/qunit-1.22.0.css'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <![endif]-->
 </head>
+<body>
 
-<body style="background-color: transparent">
 <div class="templatemo-content col-1 light-gray-bg">
-  <div class="templatemo-content-widget white-bg">
-    <div class="panel panel-default no-border">
-      <div class="panel-body">
-        <form class="templatemo-login-form">
-          <div class="form-group">
-            <label class="col-lg-2  control-label" style="width: 100%;">服务项目图片</label>
-            <div class="input-group-btn">
-              <div class="btn btn-file">
-                <input id="file-1" class="file" type="file" multiple="" data-preview-file-type="any"
-                       data-upload-url="#" data-preview-file-icon="">
-              </div>
+    <div class="templatemo-content-widget white-bg">
+        <div class="panel panel-default no-border">
+            <div class="panel-body">
+                <form class="templatemo-login-form">
+                    <div class="row form-group">
+                        <label class="col-lg-2  control-label" style="width: 100%;">服务项目图片上传</label>
+                        <div class="input-group-btn">
+                            <div class="btn btn-file">
+                                <input id="imgfl" class="file" type="file" multiple="" data-preview-file-type="any"
+                                       data-upload-url="uploadFile" data-preview-file-icon="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">服务项目名称</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">服务内容</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="desc_content" name="desc_content">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">院线价格</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="Number" class="form-control" id="origin_price" name="origin_price">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">当前价格</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="Number" class="form-control" id="cur_price" name="cur_price">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">适用人群</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="desc_fit" name="desc_fit">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">视频地址</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="video_url" name="video_url">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">服务介绍</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                <textarea class="form-control" id="desc_content_short" name="desc_content_short"
+                          rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">服务步骤</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="desc_step" name="desc_step">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">服务时长</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="desc_service_time" name="desc_service_time">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">中途取消服务说明</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="desc_cancel" name="desc_cancel">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">长距离服务加价</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="desc_long_distance" name="desc_long_distance">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">服务范围</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="desc_service_scale" name="desc_service_scale">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">夜间服务费用</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="desc_night" name="desc_night">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">建议疗程</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <input type="text" class="form-control" id="desc_advice_period" name="desc_advice_period">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-lg-2 control-label" style="width: 100%;">服务承若</label>
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <textarea class="form-control" id="desc_promise" name="desc_promise" rows="3"></textarea>
+                        </div>
+                    </div>
+                </form>
+                <div class="form-group text-right">
+                    <button onclick="onPostForm()" class="templatemo-blue-button">保存</button>
+                    <button onclick="onRest()" class="templatemo-white-button">重置</button>
+                    <button onclick="onBack()" id="cancel" class="templatemo-white-button">取消</button>
+                </div>
             </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">服务项目名称</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <input type="text" class="form-control" id="name" name="name">
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">服务内容</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <input type="text" class="form-control" id="desc_content" name="desc_content">
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">院线价格</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <input type="Number" class="form-control" id="origin_price" name="origin_price">
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">当前价格</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <input type="Number" class="form-control" id="cur_price" name="cur_price">
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">适用人群</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <input type="text" class="form-control" id="desc_fit" name="desc_fit">
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">视频地址</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <input type="text" class="form-control" id="video_url" name="video_url">
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">服务介绍</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <textarea class="form-control" id="desc_content_short" name="desc_content_short" rows="3"></textarea>
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">服务步骤</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <input type="text" class="form-control" id="desc_step" name="desc_step">
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">服务时长</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <input type="text" class="form-control" id="desc_service_time" name="desc_service_time">
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">中途取消服务说明</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <input type="text" class="form-control" id="desc_cancel" name="desc_cancel">
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">长距离服务加价</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <input type="text" class="form-control" id="desc_long_distance" name="desc_long_distance">
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">服务范围</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <input type="text" class="form-control" id="desc_service_scale" name="desc_service_scale">
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">夜间服务费用</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <input type="text" class="form-control" id="desc_night" name="desc_night">
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">建议疗程</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <input type="text" class="form-control" id="desc_advice_period" name="desc_advice_period">
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-lg-2 control-label" style="width: 100%;">服务承若</label>
-            <div class="col-lg-12 col-md-12 form-group">
-              <textarea class="form-control" id="desc_promise" name="desc_promise" rows="3"></textarea>
-            </div>
-          </div>
-        </form>
-        <div class="form-group text-right">
-          <button onclick="onPostForm()" class="templatemo-blue-button">保存</button>
-          <button onclick="onRest()" class="templatemo-white-button">重置</button>
-          <button onclick="onBack()" id="cancel" class="templatemo-white-button">取消</button>
         </div>
-      </div>
     </div>
-  </div>
 </div>
-<!-- JS -->
-<script src="boostrap/js/jquery-1.11.2.min.js"></script>
+
+<script src="boostrap/js/jquery.min.js"></script>
 <script src="boostrap/js/bootstrap.min.js"></script>
 <script src="boostrap/js/bootstrap-table.js"></script>
-<script src="boostrap/js/templatemo-script.js"></script>
-<script src="js/serviceDetail.js"></script>
+<script src="js/webLogic.js"></script>
+<script src="boostrap/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+<script src="js/cookieUnit.js"></script>
 <script src="js/fileinput.min.js"></script>
 <script src="js/locales/zh.js"></script>
+<script src="js/serviceDetail.js"></script>
+
 </body>
 </html>

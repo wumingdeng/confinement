@@ -25,35 +25,49 @@
         </div>
         <nav class="templatemo-left-nav">
             <ul>
-                <li><a href="setDisplay" onClick="onSelectMenu(this)" class="active" target="ifr" id="li_1"><i
-                        class="fa fa-eject fa-fw"></i>显示配置</a></li>
-                <li><a href="setGlobal" onClick="onSelectMenu(this)" target="ifr" id="li_2"><i
-                        class="fa fa-eject fa-fw"></i>参数配置</a></li>
-                <li><a href="setTechnician" onClick="onSelectMenu(this)" target="ifr" id="li_3"><i
-                        class="fa fa-eject fa-fw"></i>技师维护</a></li>
+                <li class="accordion">
+                    <a href="#" onclick="displayOrder(this,0)"><i class="glyphicon glyphicon-plus" style="margin-right: 15px"></i><span>系统配置</span></a>
+                    <ul id = "am0" class="nav nav-pills nav-stacked" style="display: none">
+                        <li><a href="setDisplay"  onClick="onSelectMenu(this)" target="ifr" id="li_0"><i
+                                class="fa fa-eject fa-fw" style="margin-left: 40px"></i>显示配置</a></li>
+                        <li><a href="setGlobal"  onClick="onSelectMenu(this)" target="ifr" id="li_1"><i
+                                class="fa fa-eject fa-fw" style="margin-left: 40px"></i>参数配置</a></li>
+                    </ul>
+                </li>
+                <li class="accordion">
+                    <a href="#" onclick="displayOrder(this,1)"><i class="glyphicon glyphicon-plus" style="margin-right: 15px"></i><span>技师管理</span></a>
+                    <ul id = "am1" class="nav nav-pills nav-stacked" style="display: none">
+                        <li><a href="technicianApproval"  onClick="onSelectMenu(this)" target="ifr" id="li_2"><i
+                                class="fa fa-eject fa-fw" style="margin-left: 40px"></i>技师审批</a></li>
+                        <li><a href="setTechnician"  onClick="onSelectMenu(this)" target="ifr" id="li_13"><i
+                                class="fa fa-eject fa-fw" style="margin-left: 40px"></i>技师维护</a></li>
+                    </ul>
+                </li>
                 <li><a href="setService" onClick="onSelectMenu(this)" target="ifr" id="li_4"><i
                         class="fa fa-eject fa-fw"></i>服务项目维护</a></li>
                 <li class="accordion">
-                    <a href="#" onclick="displayOrder(this,1)"><i class="glyphicon glyphicon-plus" style="margin-right: 15px"></i><span>订单管理</span></a>
-                    <ul id = "am1" class="nav nav-pills nav-stacked" style="display: none">
+                    <a href="#" onclick="displayOrder(this,2)"><i class="glyphicon glyphicon-plus" style="margin-right: 15px"></i><span>订单管理</span></a>
+                    <ul id = "am2" class="nav nav-pills nav-stacked" style="display: none">
                         <li><a href="orderList"  onClick="onSelectMenu(this)" target="ifr" id="li_5"><i
                                 class="fa fa-eject fa-fw" style="margin-left: 40px"></i>订单列表</a></li>
                         <li><a href="setOrder"  onClick="onSelectMenu(this)" target="ifr" id="li_6"><i
                                 class="fa fa-eject fa-fw" style="margin-left: 40px"></i>派发订单</a></li>
                         <li><a href="setCount"  onClick="onSelectMenu(this)" target="ifr" id="li_7"><i
-                                class="fa fa-eject fa-fw" style="margin-left: 40px"></i>订单结算</a></li>
+                                class="fa fa-eject fa-fw" style="margin-left: 40px"></i>结算管理</a></li>
+                        <li><a href="countList"  onClick="onSelectMenu(this)" target="ifr" id="li_8"><i
+                                class="fa fa-eject fa-fw" style="margin-left: 40px"></i>结算记录</a></li>
                     </ul>
                 </li>
                 <li class="accordion">
-                    <a href="#" onclick="displayOrder(this,2)"><i class="glyphicon glyphicon-plus" style="margin-right: 15px"></i><span>提现管理</span></a>
-                    <ul id = "am2" class="nav nav-pills nav-stacked" style="display: none">
-                        <li><a href="withdrawList"  onClick="onSelectMenu(this)" target="ifr" id="li_8"><i
+                    <a href="#" onclick="displayOrder(this,3)"><i class="glyphicon glyphicon-plus" style="margin-right: 15px"></i><span>提现管理</span></a>
+                    <ul id = "am3" class="nav nav-pills nav-stacked" style="display: none">
+                        <li><a href="withdrawList"  onClick="onSelectMenu(this)" target="ifr" id="li_9"><i
                                 class="fa fa-eject fa-fw" style="margin-left: 40px"></i>提现记录</a></li>
-                        <li><a href="withdrawAPProval"  onClick="onSelectMenu(this)" target="ifr" id="li_9"><i
+                        <li><a href="withdrawAPProval"  onClick="onSelectMenu(this)" target="ifr" id="li_10"><i
                                 class="fa fa-eject fa-fw" style="margin-left: 40px"></i>提现审核</a></li>
                     </ul>
                 </li>
-                <li><a href="/?clear=0" onClick="onSelectMenu(this)" id="li_10"><i class="fa fa-eject fa-fw"></i>退出</a>
+                <li><a href="/?clear=0" onClick="onSelectMenu(this)" id="li_11"><i class="fa fa-eject fa-fw"></i>退出</a>
                 </li>
             </ul>
         </nav>
@@ -106,7 +120,7 @@
             document.getElementById("am"+index).style.display = 'block'
         }
     }
-    var selectedMeun = $('#li_1')
+    var selectedMeun = $('#li_0')
     function onSelectMenu(_this) {
         var id = _this.id;
         if (selectedMeun == $('#' + id)) return

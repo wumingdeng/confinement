@@ -20,12 +20,14 @@ router.get('/setTechnician', function(req, res, next) {
 
 router.get('/technicianDetail', function(req, res, next) {
   res.render('technicianDetail', { title: 'Express' });
-  // res.render('technicianDetail', { title: 'Express' });
+});
+
+router.get('/technicianApproval', function(req, res, next) {
+  res.render('technicianApproval', { title: 'Express' });
 });
 
 router.get('/modifyTechnician', function(req, res, next) {
   res.render('modifyTechnician', { title: 'Express' });
-  // res.render('technicianDetail', { title: 'Express' });
 });
 
 router.get('/serviceDetail', function(req, res, next) {
@@ -54,6 +56,10 @@ router.get('/withdrawApproval', function(req, res, next) {
 
 router.get('/setCount', function(req, res, next) {
   res.render('setCount', { title: 'Express' });
+});
+
+router.get('/countList', function(req, res, next) {
+  res.render('countList', { title: 'Express' });
 });
 
 router.get('/out', function(req, res, next) {

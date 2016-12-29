@@ -4,7 +4,7 @@
 
 
 $(function () {
-    window.parent.onAutoIframeHeight(750) //设置Iframe的高度
+    window.parent.onAutoIframeHeight(1000) //设置Iframe的高度
     $('#technicianTable').bootstrapTable('destroy')
     $('#technicianTable').bootstrapTable({
         method: 'get',
@@ -20,30 +20,27 @@ $(function () {
         onDblClickRow: function (row, $element, field) {
             if (field == "us" || field == "name" || field == "dt" || field == "id" || field == "as" || field == "tj" || field == "at") {
 
-                // findCountByTechnicianID(row.id)
             }
         }
     })
     
-});
-function findCountByTechnicianID(tid){
-    $('#countList').bootstrapTable('destroy')
-    $('#countList').bootstrapTable({
-        method: 'get',
-        url: '/dataJson/count.json',
-        // sidePagination: "server",
-        dataType: "json",
-        pageSize:  10,
-        striped: true,
-        onLoadSuccess: function () {
-            
-            window.parent.onLoading("hide")
-            window.parent.document.documentElement.scrollTop = window.parent.document.body.scrollTop = 1000
-        },
-        onResetView: function () {
-        }
+    $('#cpyCommit').click(function () {
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: '/manageProject/copyProject',
+            data: $('#cpyFrm').serialize(),// 你的formid
+            async: false,
+            error: function (request) {
+                alert("Connection error");
+            },
+            success: function (data) {
+                $('#table').bootstrapTable('insertRow', data)
+            }
+        });
     })
-}
+});
+
 function onSuccess(row) {
     $('#table').bootstrapTable('remove', {
         field: '_id',
@@ -95,9 +92,9 @@ function rmbFormatter(value,row,index){
 function operateFormatter(value, row, index) {
     var qz = getCookie('right')
     return [
-        '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:10px;width:30%">删除</button>',
-        '<button class="RoleOfEdit btn btn-primary  btn-sm" style="margin-right:10px;width:30%" >修改资料</button>',
-        '<button class="enter btn btn-primary  btn-sm" style="width:30%" >推荐</button>',
+        '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:10px;width:45%">删除</button>',
+        // '<button class="RoleOfEdit btn btn-primary  btn-sm" style="margin-right:10px;width:30%" >修改资料</button>',
+        '<button class="enter btn btn-primary  btn-sm" style="width:45%" >审批</button>',
     ].join('');
 }
 function rtFormatter(value, row, index) {
@@ -111,21 +108,15 @@ function atFormatter(value, row, index) {
 
 window.operateEvents = {
     'click .RoleOfA': function (e, value, row, index) {
-        document.getElementById("modalTt").innerHTML="是否确定删除该技师"
         $('#myModal').modal('show')
-        $('#commit').click(function () {
-            $.post('/manageProject/deleteProject', {_id: row._id, pn: row.pn}, onSuccess(row),"json")
+        $('#deleteCommit').click(function () {
+            $.getJSON('/manageProject/deleteProject', {_id: row._id, pn: row.pn}, onSuccess(row))
         })
     },
     'click .enter': function (e, value, row, index) {
-        document.getElementById("modalTt").innerHTML="是否确定把该技师设置为推荐"
-        $('#myModal').modal('show')
-        $('#commit').click(function () {
-            $.post('/manageProject/tjProject', {_id: row._id, pn: row.pn}, onSuccess(row),"json")
-        })
-    },
-    'click .RoleOfEdit': function (e, value, row, index) {
-       var myurl = "modifyTechnician?name=" + row.id;
+        // window.parent.onLoading("show")
+        var myurl = "technicianDetail?name=" + row.id;
         window.location.assign(encodeURI(myurl));
+
     }
 };

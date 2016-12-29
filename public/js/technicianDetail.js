@@ -2,7 +2,7 @@
  * Created by Fizzo on 16/12/8.
  */
 $(function(){
-    window.parent.onAutoIframeHeight(1700)
+    window.parent.onAutoIframeHeight(1900)
     document.getElementById("cn").value = getCookie('cn');
     var pname = ""
     var url = decodeURI(location.href);
@@ -77,7 +77,6 @@ function setInputValue(argPost) {
     document.getElementById("rom_1").value = argPost.rom_1 || "";
     document.getElementById("itr_1").value = argPost.itr_1 || "";
     document.getElementById("like_1").value = argPost.like_1 || "";
-    
 }
 
 

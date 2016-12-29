@@ -6,44 +6,6 @@ var selectedOrder = ""
 $(function() {
     window.parent.onAutoIframeHeight(750)
 
-    $('#orderTable').bootstrapTable('destroy')
-    $('#orderTable').bootstrapTable({
-        method: 'get',
-        url: '/dataJson/order.json',
-        // sidePagination: "server",
-        dataType: "json",
-        pageSize:  10,
-        striped: true,
-        showColumns:true,
-        onLoadSuccess: function () {
-        },
-        onResetView: function () {
-        },
-        onDblClickRow: function (row, $element, field) {
-            // if (field == "id" || field == "name") {
-                findCountByOrderId(row.id)
-            // }
-
-        }
-    })
-
-    $("#submitAlert").click(function(){
-        $("#alertSumbmit").modal('hide')
-    })
-    
-    $("#pushRmbCommit").click(function(){
-        var rmb =  document.getElementById("rmb").value
-        if(rmb>0){
-        document.getElementById("sendTN").innerHTML ="你确定为订单号为:"+ selectedOrder+",转入金额"+rmb+"元";
-        $("#alertSumbmit").modal('show')
-        }else{
-
-        }
-        $("#pushRmb").modal('hide')
-    })
-})
-
-function findCountByOrderId(orderId){
     $('#countList').bootstrapTable('destroy')
     $('#countList').bootstrapTable({
         method: 'get',
@@ -52,13 +14,40 @@ function findCountByOrderId(orderId){
         dataType: "json",
         pageSize:  10,
         striped: true,
+        search:true,
+        searchOnEnterKey:true,
+        showColumns:true,
         onLoadSuccess: function () {
-            window.parent.document.documentElement.scrollTop = window.parent.document.body.scrollTop = 1300
+        },
+        onResetView: function () {
+        }
+
+    })
+
+})
+
+function findCountByOrderId(orderId){
+    function getParams() {
+
+        return orderId;
+    }
+    $('#countList').bootstrapTable('destroy')
+    $('#countList').bootstrapTable({
+        method: 'get',
+        url: '/dataJson/count.json',
+        // sidePagination: "server",
+        queryParams:getParams,
+        dataType: "json",
+
+        pageSize:  10,
+        striped: true,
+        onLoadSuccess: function () {
         },
         onResetView: function () {
         }
     })
 }
+
 function tFormatter(value, row, index) {
     var newTime = new Date(Number(value));
     return newTime.getFullYear() + "-" + (newTime.getMonth() + 1) + "-" + newTime.getDate()
@@ -86,8 +75,8 @@ function sFormatter(value, row, index){
 function operateFormatter(value, row, index) {
     var qz = getCookie('right')
     return [
-        '<button class="RoleOfEdit btn btn-primary  btn-sm">转入金额</button>'
-        // '<button class="enter btn btn-primary  btn-sm" style="width:45%" >订单结算列表</button>',
+        '<button class="RoleOfEdit btn btn-primary  btn-sm" style="margin-right:10px;width:45%">转入金额</button>',
+        '<button class="enter btn btn-primary  btn-sm" style="width:45%" >订单结算列表</button>',
     ].join('');
 }
 

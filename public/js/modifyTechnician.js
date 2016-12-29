@@ -2,7 +2,7 @@
  * Created by Fizzo on 16/12/8.
  */
 $(function(){
-    window.parent.onAutoIframeHeight(1700)
+    window.parent.onAutoIframeHeight(2000)
     document.getElementById("cn").value = getCookie('cn');
     var name = ""
     var url = decodeURI(location.href);
@@ -44,31 +44,20 @@ function onPostForm() {
 }
 
 function setInputValue(argPost) {
-    document.getElementById("head").value = argPost.head || "";
-    document.getElementById("nm").value = argPost.nm || "";
+    document.getElementById("tel").value = argPost.tel || "";
+    document.getElementById("photourl").value = argPost.photourl || "";
+    document.getElementById("name").value = argPost.name || "";
     document.getElementById("sex").value = argPost.sex || "";
-    document.getElementById("selectJob").value = argPost.selectJob || "";
-    document.getElementById("ptrz").value = argPost.ptrz || "";
-    document.getElementById("qwrz").value = argPost.qwrz || "";
-    document.getElementById("adr").value = argPost.adr || "";
-    document.getElementById("rom").value = argPost.rom || "";
-    document.getElementById("itr").value = argPost.itr || "";
+    document.getElementById("position").value = argPost.position || "";
+    document.getElementById("age").value = argPost.age || "";
+    document.getElementById("expyears").value = argPost.expyears || "";
+    document.getElementById("normal_cert").value = argPost.normal_cert || "";
+    document.getElementById("expert_cert").value = argPost.expert_cert || "";
+    document.getElementById("address").value = argPost.address || "";
+    document.getElementById("keshi").value = argPost.keshi || "";
+    document.getElementById("content").value = argPost.content || "";
     document.getElementById("like").value = argPost.like || "";
-
-    document.getElementById("head_1").value = argPost.head_1 || "";
-    document.getElementById("nm_1").value = argPost.nm_1 || "";
-    document.getElementById("sex_1").value = argPost.sex_1 || "";
-    document.getElementById("selectJob_1").value = argPost.selectJob_1 || "";
-    document.getElementById("ptrz_1").value = argPost.ptrz_1 || "";
-    document.getElementById("qwrz_1").value = argPost.qwrz_1 || "";
-    document.getElementById("adr_1").value = argPost.adr_1 || "";
-    document.getElementById("rom_1").value = argPost.rom_1 || "";
-    document.getElementById("itr_1").value = argPost.itr_1 || "";
-    document.getElementById("like_1").value = argPost.like_1 || "";
-    
 }
-
-
 //复写重置方法
 function onRest() {
     setInputValue(g_argPost)

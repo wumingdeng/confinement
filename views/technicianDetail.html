@@ -12,149 +12,267 @@
 </head>
 
 <body style="background-color: transparent">
-                        
+
 <div class="templatemo-content col-1 light-gray-bg">
     <div class="templatemo-content-widget white-bg">
         <div class="panel panel-default" style="width:49%;float:left">
             <div class="panel-body">
-                    <div class="row form-group">
-                        <label class="col-lg-2  control-label" style="width: 100%;">肖像上传</label>
-                        <img src='img/header.jpg' style="width:100px" id="head" name="head">
+                <div class="row form-group">
+                    <label class="col-lg-2  control-label" style="width: 100%;">肖像上传</label>
+                    <img src='img/header.jpg' style="width:100px" id="head" name="head">
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">姓名</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <input type="text" class="form-control" id="nm" name="nm">
                     </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">姓名</label>
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <input type="text" class="form-control" id="nm" name="nm">
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">性别</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <select class="form-control" id="sex" name="sex">
+                            <option value="0">男</option>
+                            <option value="1">女</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">职称</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <select id="selectJob" name="selectJob" class="form-control">
+                            <option>护士</option>
+                            <option>护师</option>
+                            <option>主管护师</option>
+                            <option>副主任护师</option>
+                            <option>主任护师</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">从业时间</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <select id="expyears" name="expyears" class="form-control">
+                            <option>半年</option>
+                            <option>一年</option>
+                            <option>两年</option>
+                            <option>三年</option>
+                            <option>四年</option>
+                            <option>五年</option>
+                            <option>五年以上</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">普通认证</label>
+                    <img src="img/paizhao.jpg" width="200px" align="center" id="ptrz" name="ptrz">
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">权威认证</label>
+                    <img src="img/paizhao.jpg" width="200px" id="qwrz" name="qwrz">
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">地址</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <input type="text" class="form-control" id="adr" name="adr">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">电话</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <input type="text" class="form-control" id="tel" name="tel">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">科室</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <input type="text" class="form-control" id="rom" name="rom">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">简介</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <textarea class="form-control" id="itr" name="itr" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <label class="control-label templatemo-block" style="width: 100%;">擅长</label>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r1">
+                            <label for="r1" class="font-weight-400"><span></span>通乳</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r2">
+                            <label for="r2" class="font-weight-400"><span></span>塑性</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r3">
+                            <label for="r3" class="font-weight-400"><span></span>减肥</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r4">
+                            <label for="r4" class="font-weight-400"><span></span>少奶</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r5">
+                            <label for="r5" class="font-weight-400"><span></span>无痛通乳</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r6">
+                            <label for="r6" class="font-weight-400"><span></span>通乳</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r7">
+                            <label for="r7" class="font-weight-400"><span></span>塑性</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r8">
+                            <label for="r8" class="font-weight-400"><span></span>减肥</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r9">
+                            <label for="r9" class="font-weight-400"><span></span>减肥</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r10">
+                            <label for="r10" class="font-weight-400"><span></span>减肥</label>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">性别</label>
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <select class="form-control" id="sex" name="sex">
-                                <option value="0">男</option>
-                                <option value="1">女</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">职称</label>
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <select id="selectJob" name="selectJob" class="form-control">
-                                <option>护士</option>
-                                <option>护师</option>
-                                <option>主管护师</option>
-                                <option>副主任护师</option>
-                                <option>主任护师</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">普通认证</label>
-                        <img src="img/paizhao.jpg" width="200px" id="ptrz" name="ptrz">
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">权威认证</label>
-                        <img src="img/paizhao.jpg" width="200px" id="qwrz" name="qwrz">
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">地址</label>
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <input type="text" class="form-control" id="adr" name="adr">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">科室</label>
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <input type="text" class="form-control" id="rom" name="rom">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">简介</label>
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <textarea class="form-control" id="itr" name="itr" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">擅长</label>
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <textarea class="form-control" id="like" name="like" rows="3"></textarea>
-                        </div>
-                    </div>
-                    </div>
-            </div>
-            <div class="panel panel-default" style="width:49%;float:right">
-            <div class="panel-body">
-                    <div class="row form-group">
-                        <label class="col-lg-2  control-label" style="width: 100%;">肖像上传</label>
-                        <img src='img/header.jpg' style="width:100px" id="head_1" name="head_1">
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">姓名</label>
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <input type="text" class="form-control" id="nm_1" name="nm_1">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">性别</label>
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <select class="form-control" id="sex_1">
-                                <option value="0">男</option>
-                                <option value="1">女</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">职称</label>
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <select id="selectJob_1" class="form-control">
-                                <option>护士</option>
-                                <option>护师</option>
-                                <option>主管护师</option>
-                                <option>副主任护师</option>
-                                <option>主任护师</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">普通认证</label>
-                        <img src="img/paizhao.jpg" width="200px" id="ptrz_1" name="ptrz_1">
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">权威认证</label>
-                        <img src="img/paizhao.jpg" width="200px" id="qwrz_1" name="qwrz_1">
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">地址</label>
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <input type="text" class="form-control" id="adr_1" name="adr_1">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">科室</label>
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <input type="text" class="form-control" id="rom_1" name="rom_1">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">简介</label>
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <textarea class="form-control" id="itr_1" name="itr_1" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <label class="col-lg-2 control-label" style="width: 100%;">擅长</label>
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <textarea class="form-control" id="like_1" name="like_1" rows="3"></textarea>
-                        </div>
-                    </div>
-                     </div>
-            </div>
-            <div class="form-group text-right">
-                    <button onclick="onPostForm()" class="templatemo-blue-button">审批</button>
-                    <button onclick="onBack()" id="cancel" class="templatemo-white-button">取消</button>
+                </div>
             </div>
         </div>
+        <div class="panel panel-default" style="width:49%;float:right">
+            <div class="panel-body">
+                <div class="row form-group">
+                    <label class="col-lg-2  control-label" style="width: 100%;">肖像上传</label>
+                    <img src='img/header.jpg' style="width:100px" id="head_1" name="head_1">
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">姓名</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <input type="text" class="form-control" id="nm_1" name="nm_1">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">性别</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <select class="form-control" id="sex_1">
+                            <option value="0">男</option>
+                            <option value="1">女</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">职称</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <select id="selectJob_1" name="selectJob_1" class="form-control">
+                            <option>护士</option>
+                            <option>护师</option>
+                            <option>主管护师</option>
+                            <option>副主任护师</option>
+                            <option>主任护师</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">从业时间</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <select id="expyears_1" name="expyears_1" class="form-control">
+                            <option>半年</option>
+                            <option>一年</option>
+                            <option>两年</option>
+                            <option>三年</option>
+                            <option>四年</option>
+                            <option>五年</option>
+                            <option>五年以上</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">普通认证</label>
+                    <img src="img/paizhao.jpg" width="200px" id="ptrz_1" name="ptrz_1">
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">权威认证</label>
+                    <img src="img/paizhao.jpg" width="200px" id="qwrz_1" name="qwrz_1">
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">地址</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <input type="text" class="form-control" id="adr_1" name="adr_1">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">电话</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <input type="text" class="form-control" id="tel_1" name="tel_1">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">科室</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <input type="text" class="form-control" id="rom_1" name="rom_1">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-lg-2 control-label" style="width: 100%;">简介</label>
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <textarea class="form-control" id="itr_1" name="itr_1" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <label class="control-label templatemo-block" style="width: 100%;">擅长</label>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r1_1">
+                            <label for="r1" class="font-weight-400"><span></span>通乳</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r2_1">
+                            <label for="r2" class="font-weight-400"><span></span>塑性</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r3_1">
+                            <label for="r3" class="font-weight-400"><span></span>减肥</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r4_1">
+                            <label for="r4" class="font-weight-400"><span></span>减肥</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r5_1">
+                            <label for="r5" class="font-weight-400"><span></span>减肥</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r6_1">
+                            <label for="r6" class="font-weight-400"><span></span>通乳</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r7_1">
+                            <label for="r7" class="font-weight-400"><span></span>塑性</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r8_1">
+                            <label for="r8" class="font-weight-400"><span></span>减肥</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r9_1">
+                            <label for="r9" class="font-weight-400"><span></span>减肥</label>
+                        </div>
+                        <div class="templatemo-block margin-bottom-5" style="width:20%;float:left">
+                            <input type="checkbox" name="emailOptions" id="r10_1">
+                            <label for="r10" class="font-weight-400"><span></span>减肥</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group text-right">
+            <button onclick="onPostForm()" class="templatemo-blue-button">审批</button>
+            <button onclick="onBack()" id="cancel" class="templatemo-white-button">取消</button>
+        </div>
     </div>
+</div>
 </div>
 <!-- JS -->
 <script src="boostrap/js/jquery-1.11.2.min.js"></script>

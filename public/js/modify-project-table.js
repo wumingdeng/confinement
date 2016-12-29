@@ -61,9 +61,29 @@ function inputFormatter1(dataFile,index){
     }
     return "<input type='text' class='form-control' data-container='body' data-toggle='popover' data-placement='bottom' onkeyup='filterStr(this)' data-content='不能为空' style='width: 100%' value='"+val+"' id='"+_id+"' name='"+_id+"'>"
 }
+
+function fileImageFormatter(dataFile,index,arrData){
+    var _id = dataFile+"_"+index
+    var val = ""
+    if(arrData && arrData[index]){
+        val = arrData[index][dataFile] || ""
+    }
+    return "<input class='file' type='file' multiple='' data-preview-file-type='any' data-upload-url='#' data-preview-file-icon='' id='"+_id+"' name='"+_id+"'>"
+}
+
+function selectFormatter(){
+    return '<select id="selectError" class="form-control">'+
+        '<option>首页</option>'+
+        '<option>通乳</option>'+
+        '<option>挤奶</option>'+
+        '<option>塑性</option>'+
+        '<option>减肥</option>'+
+        '</select>'
+}
+
 function k1Formatter(value, row, index){
     
-    return inputFormatter("adr",index)
+    return fileImageFormatter("adr",index,swiperData)
 }
 function k2Formatter(value, row, index){
      return inputFormatter("linkAdr",index)
@@ -73,13 +93,14 @@ function k3Formatter(value, row, index){
     return inputFormatter("idx",index)
 }
 function k4Formatter(value, row, index){
-    return inputFormatter("pIdx",index)
+    return selectFormatter("pIdx",index)
 }
 function nameFormatter(value,row,index){
     return inputFormatter1("name",index)
 }
 function addrFormatter(value,row,index){
-    return inputFormatter1("adr",index)
+    return fileImageFormatter("adr",index,servicesData)
+    // return inputFormatter1("adr",index)
 }
 function idxFormatter(value,row,index){
     return inputFormatter1("idx",index)

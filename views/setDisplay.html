@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="boostrap/css/bootstrap-table.min.css">
     <link href="boostrap/css/templatemo-style.css" rel="stylesheet">
     <link href="boostrap/css/font-awesome.min.css" rel="stylesheet">
-
+    <link href="css/fileinput.min.css" rel="stylesheet">
     <link rel='stylesheet' , href='css/qunit-1.22.0.css'>
     <link href="css/modalExtra.css" rel="stylesheet">
 </head>
@@ -21,14 +21,16 @@
     <div class="templatemo-content-widget white-bg">
         <div class="panel panel-default no-border">
             <div class="panel-body">
-                
                 <div id="toolbar">
                     <button id="btn_swiper" class="btn btn-default">添加轮播图片</button>
                 </div>
                 <table id="table" class="table table-striped table-bordered templatemo-user-table" data-toggle="table" data-page-list=""
                        data-height="auto">
                     <colgroup>
-                        <col style="width:95%">
+                        <col style="width:5%">
+                        <col style="width:80%">
+                        <col style="width:5%">
+                        <col style="width:5%">
                         <col style="width:5%">
                     </colgroup>
                     <thead>
@@ -47,12 +49,12 @@
                 </div>
                 <table id="xsTable" class="table table-striped table-bordered templatemo-user-table" data-toggle="table" data-page-list=""
                        data-height="auto">
-                    <colgroup>
-                        <col style="width:70%">
-                        <col style="width:5%">
-                        <col style="width:20%">
-                        <col style="width:5%">
-                    </colgroup>
+                    <!--<colgroup>-->
+                        <!--<col style="width:10%">-->
+                        <!--<col style="width:5%">-->
+                        <!--<col style="width:20%">-->
+                        <!--<col style="width:5%">-->
+                    <!--</colgroup>-->
                     <thead>
                     <tr>
                         <th data-field="_id"></th>
@@ -79,6 +81,7 @@
 <script src="boostrap/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 <script src="js/modify-project-table.js"></script>
 <script src="boostrap/bootstrap-table-zh-CN.js"></script>
+<script src="js/fileinput.min.js"></script>
 <script>
     window.parent.onAutoIframeHeight() //设置Iframe的高度
 </script>
