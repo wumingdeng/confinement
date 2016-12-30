@@ -4,23 +4,18 @@
 
 
 $(function () {
-    window.parent.onAutoIframeHeight(1000) //设置Iframe的高度
+    window.parent.onAutoIframeHeight(750) //设置Iframe的高度
     $('#technicianTable').bootstrapTable('destroy')
     $('#technicianTable').bootstrapTable({
-        method: 'get',
-        url: '/dataJson/technician.json',
-        // sidePagination: "server",
+        method: 'post',
+        url: 'http://139.196.238.46:7001/api/getWorkersUnReview',
+        sidePagination: "server",
         dataType: "json",
         pageSize:  10,
         striped: true,
         onLoadSuccess: function () {
         },
         onResetView: function () {
-        },
-        onDblClickRow: function (row, $element, field) {
-            if (field == "us" || field == "name" || field == "dt" || field == "id" || field == "as" || field == "tj" || field == "at") {
-
-            }
         }
     })
     
@@ -92,9 +87,9 @@ function rmbFormatter(value,row,index){
 function operateFormatter(value, row, index) {
     var qz = getCookie('right')
     return [
-        '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:10px;width:45%">删除</button>',
+        // '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:10px;width:45%">删除</button>',
         // '<button class="RoleOfEdit btn btn-primary  btn-sm" style="margin-right:10px;width:30%" >修改资料</button>',
-        '<button class="enter btn btn-primary  btn-sm" style="width:45%" >审批</button>',
+        '<button class="enter btn btn-primary  btn-sm">审批</button>',
     ].join('');
 }
 function rtFormatter(value, row, index) {
@@ -107,15 +102,15 @@ function atFormatter(value, row, index) {
 }
 
 window.operateEvents = {
-    'click .RoleOfA': function (e, value, row, index) {
-        $('#myModal').modal('show')
-        $('#deleteCommit').click(function () {
-            $.getJSON('/manageProject/deleteProject', {_id: row._id, pn: row.pn}, onSuccess(row))
-        })
-    },
+    // 'click .RoleOfA': function (e, value, row, index) {
+    //     $('#myModal').modal('show')
+    //     $('#deleteCommit').click(function () {
+    //         $.getJSON('/manageProject/deleteProject', {_id: row._id, pn: row.pn}, onSuccess(row))
+    //     })
+    // },
     'click .enter': function (e, value, row, index) {
         // window.parent.onLoading("show")
-        var myurl = "technicianDetail?name=" + row.id;
+        var myurl = "technicianDetail?row=" + row.id;
         window.location.assign(encodeURI(myurl));
 
     }

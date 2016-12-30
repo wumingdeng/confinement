@@ -1,6 +1,8 @@
 /**
  * Created by Fizzo on 16/12/8.
  */
+var selectOid = ""
+var selectWid = ""
 $(function() {
     window.parent.onAutoIframeHeight(800)
 
@@ -19,7 +21,10 @@ $(function() {
     })
 
     $("#submitAlert").click(function(){
-        $("#alertSumbmit").modal('hide')
+        $.post("http://139.196.238.46:7001/api/assignWorker",{oid:selectOid,wid:selectWid},function(data){
+            $("#alertSumbmit").modal('hide')
+        },"json")
+       
     })
 
     $("#searchT").click(function(){

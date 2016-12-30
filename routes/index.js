@@ -62,6 +62,11 @@ router.get('/countList', function(req, res, next) {
   res.render('countList', { title: 'Express' });
 });
 
+
+router.get('/setUsers', function(req, res, next) {
+  res.render('setUsers', { title: 'Express' });
+});
+
 router.get('/out', function(req, res, next) {
   res.render('login', { title: 'Express' });
 });

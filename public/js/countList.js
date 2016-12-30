@@ -8,9 +8,9 @@ $(function() {
 
     $('#countList').bootstrapTable('destroy')
     $('#countList').bootstrapTable({
-        method: 'get',
-        url: '/dataJson/count.json',
-        // sidePagination: "server",
+        method: 'post',
+        url:"http://139.196.238.46:7001/api/getWorkerSettleRecord",
+        sidePagination: "server",
         dataType: "json",
         pageSize:  10,
         striped: true,

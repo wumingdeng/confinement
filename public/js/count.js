@@ -2,15 +2,16 @@
  * Created by Fizzo on 16/12/8.
  */
 var selectedOrder = ""
+var selectedWorker = ""
 
 $(function() {
     window.parent.onAutoIframeHeight(750)
 
     $('#orderTable').bootstrapTable('destroy')
     $('#orderTable').bootstrapTable({
-        method: 'get',
-        url: '/dataJson/order.json',
-        // sidePagination: "server",
+        method: 'post',
+        url: 'http://139.196.238.46:7001/api/getWorkerSettleRecord',
+        sidePagination: "server",
         dataType: "json",
         pageSize:  10,
         striped: true,
@@ -18,17 +19,19 @@ $(function() {
         onLoadSuccess: function () {
         },
         onResetView: function () {
-        },
-        onDblClickRow: function (row, $element, field) {
-            // if (field == "id" || field == "name") {
-                findCountByOrderId(row.id)
-            // }
-
         }
-    })
+        // onDblClickRow: function (row, $element, field) {
+        //     // if (field == "id" || field == "name") {
+        //         findCountByOrderId(row.id) 
+        //     // }
 
+        // }
+    })
+    
     $("#submitAlert").click(function(){
-        $("#alertSumbmit").modal('hide')
+        $.post('http://139.196.238.46:7001/api/workerSettle',{oid:selectedOrder,wid:selectedWorker,settled:document.getElementById("rmb").value},fucntion(data){
+            $("#alertSumbmit").modal('hide')
+        },"json")
     })
     
     $("#pushRmbCommit").click(function(){
@@ -44,20 +47,20 @@ $(function() {
 })
 
 function findCountByOrderId(orderId){
-    $('#countList').bootstrapTable('destroy')
-    $('#countList').bootstrapTable({
-        method: 'get',
-        url: '/dataJson/count.json',
-        // sidePagination: "server",
-        dataType: "json",
-        pageSize:  10,
-        striped: true,
-        onLoadSuccess: function () {
-            window.parent.document.documentElement.scrollTop = window.parent.document.body.scrollTop = 1300
-        },
-        onResetView: function () {
-        }
-    })
+    // $('#countList').bootstrapTable('destroy')
+    // $('#countList').bootstrapTable({
+    //     method: 'get',
+    //     url: '/dataJson/count.json',
+    //     // sidePagination: "server",
+    //     dataType: "json",
+    //     pageSize:  10,
+    //     striped: true,
+    //     onLoadSuccess: function () {
+    //         window.parent.document.documentElement.scrollTop = window.parent.document.body.scrollTop = 1300
+    //     },
+    //     onResetView: function () {
+    //     }
+    // })
 }
 function tFormatter(value, row, index) {
     var newTime = new Date(Number(value));
@@ -97,7 +100,8 @@ window.operateEvents = {
     },
     'click .RoleOfEdit': function (e, value, row, index) {
         console.log(row.id)
-        selectedOrder = row.id
+        selectedOrder = row.oid
+        selectedWorker = row.wid
         $('#pushRmb').modal('show')
     }
 };

@@ -1,26 +1,29 @@
 /**
  * Created by Fizzo on 16/12/8.
  */
+var isModify = false
+var g_argPost = {}
 $(function(){
     window.parent.onAutoIframeHeight(2000)
-    document.getElementById("cn").value = getCookie('cn');
+    var modifyer = getCookie('cn');
     var name = ""
     var url = decodeURI(location.href);
     var tmp1 = url.split("?")[1];
-    var isModify = false
+    
 
     if (tmp1) {
-        var temp = tmp1.split("&")
-        var tmp2 = temp[0];
-        name = tmp2.split("=")[1];
+        isModify = true
+        var temp = tmp1.split("&")[0]
+        var rowStr = temp.split("=")[1];
+        g_argPost = JSON.parse(rowStr)
     }
 
-    var g_argPost = {}
-    $.getJSON("/manageProject/getProjectByName", {pn: name}, function (argPost) {
-        argPost = argPost.rows.arg;
-        g_argPost = argPost
-        setInputValue(argPost)
-    })
+    
+    // $.getJSON("/manageProject/getProjectByName", {pn: name}, function (argPost) {
+    //     argPost = argPost.rows.arg;
+    //     g_argPost = argPost
+        setInputValue(g_argPost)
+    // })
 })
 function onPostForm() {
     $.ajax({

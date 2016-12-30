@@ -19,7 +19,10 @@
 <body>
 <div class="templatemo-flex-row">
     <div class="templatemo-sidebar" style="width: 15%;float: left" >
-
+        <div class="profile-photo-container">
+            <img src="img/pro.png" alt="Profile Photo" class="img-responsive">
+            <!--<div class="profile-photo-overlay"></div>-->
+        </div>
         <div class="mobile-menu-icon">
             <i class="fa fa-bars"></i>
         </div>
@@ -67,7 +70,9 @@
                                 class="fa fa-eject fa-fw" style="margin-left: 40px"></i>提现审核</a></li>
                     </ul>
                 </li>
-                <li><a href="/?clear=0" onClick="onSelectMenu(this)" id="li_11"><i class="fa fa-eject fa-fw"></i>退出</a>
+                <li><a href="setUsers" onClick="onSelectMenu(this)" target="ifr" id="li_11"><i class="fa fa-eject fa-fw"></i>用户管理</a>
+                </li>
+                <li><a href="/?clear=0" onClick="onSelectMenu(this)" id="li_12"><i class="fa fa-eject fa-fw"></i>退出</a>
                 </li>
             </ul>
         </nav>
@@ -102,6 +107,7 @@
 <script src="js/cookieUnit.js"></script>
 <script src="js/fileinput.min.js"></script>
 <script src="js/locales/zh.js"></script>
+
 <script>
     var _self
     $(function () {

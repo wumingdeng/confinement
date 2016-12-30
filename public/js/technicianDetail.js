@@ -3,32 +3,16 @@
  */
 $(function(){
     window.parent.onAutoIframeHeight(1900)
-    document.getElementById("cn").value = getCookie('cn');
-    var pname = ""
+    var reviewer = getCookie('cn');
     var url = decodeURI(location.href);
     var tmp1 = url.split("?")[1];
-    var isModify = false
 
-    if (tmp1) {
-        var temp = tmp1.split("&")
-        var tmp2 = temp[0];
-        var tmp3 = tmp2.split("=")[1];
-        document.getElementById("isc").value = tmp3
-        isModify = tmp3 == '0'
-        if (isModify) {
-            document.getElementById("pn").style.display = 'none'
-        }
-        if (temp[1]) {
-            pname = temp[1].split("=")[1];
-            document.getElementById("titleH2").innerHTML = pname;
-            document.getElementById("pn").value = pname;
-            document.getElementById("pnDiv").style.display = 'none'
-        }
-    }
+    var wid = temp.split("=")[1];
 
     var g_argPost = {}
     document.getElementById("title").innerHTML = "修改参数"
-    $.getJSON("/manageProject/getProjectByName", {pn: pname}, function (argPost) {
+   
+    $.getJSON("/manageProject/getProjectByName", {id: wid}, function (argPost) {
         argPost = argPost.rows.arg;
         g_argPost = argPost
         setInputValue(argPost)
@@ -38,7 +22,8 @@ function onPostForm() {
     $.ajax({
         cache: true,
         type: "POST",
-        url: '/manageProject/saveProject',
+        // url: '/manageProject/saveProject',
+        url:'http://139.196.238.46:7001/api/reviewWorker'
         data: postData,// 你的formid
         async: false,
         error: function (request) {
