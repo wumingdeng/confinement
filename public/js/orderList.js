@@ -9,9 +9,9 @@ $(function() {
 
     $('#orderTable').bootstrapTable('destroy')
     $('#orderTable').bootstrapTable({
-        method: 'get',
-        url: '/dataJson/order.json',
-        // sidePagination: "server",
+        method: 'post',
+        url: 'http://139.196.238.46:7001/api/getOrders',
+        sidePagination: "server",
         dataType: "json",
         pageSize:  10,
         striped: true,
@@ -48,7 +48,7 @@ function sFormatter(value, row, index){
 }
 
 function conectFormatter(value, row, index){
-    return row.name+": "+row.conect
+    return row.username+": "+row.tel
 }
 
 

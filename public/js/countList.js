@@ -15,6 +15,10 @@ $(function() {
         pageSize:  10,
         striped: true,
         search:true,
+        queryParams:function(params){
+            params.wid = 1
+            return params
+        },
         searchOnEnterKey:true,
         showColumns:true,
         onLoadSuccess: function () {

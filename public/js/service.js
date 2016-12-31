@@ -7,9 +7,9 @@ $(function () {
     window.parent.onAutoIframeHeight(800) //设置Iframe的高度
     $('#table').bootstrapTable('destroy')
     $('#table').bootstrapTable({
-        method: 'get',
-        url: '/dataJson/service.json',
-        // sidePagination: "server",
+        method: 'post',
+        url: 'http://139.196.238.46:7001/api/getServices',
+        sidePagination: "server",
         dataType: "json",
         pageSize:  10,
         striped: true,

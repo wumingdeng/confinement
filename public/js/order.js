@@ -8,9 +8,9 @@ $(function() {
 
     $('#orderTable').bootstrapTable('destroy')
     $('#orderTable').bootstrapTable({
-        method: 'get',
-        url: '/dataJson/order.json',
-        // sidePagination: "server",
+        method: 'post',
+        url: 'http://139.196.238.46:7001/api/getOrdersNeedHandle',
+        sidePagination: "server",
         dataType: "json",
         pageSize:  10,
         striped: true,

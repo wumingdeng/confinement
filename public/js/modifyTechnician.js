@@ -59,7 +59,7 @@ function setInputValue(argPost) {
     document.getElementById("address").value = argPost.address || "";
     document.getElementById("keshi").value = argPost.keshi || "";
     document.getElementById("content").value = argPost.content || "";
-    document.getElementById("like").value = argPost.like || "";
+    
 }
 //复写重置方法
 function onRest() {
