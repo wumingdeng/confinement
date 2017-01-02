@@ -29,10 +29,10 @@
                                    onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="orderWaitTime" name="orderWaitTime">
                         </div>
                         <div class="col-lg-2 col-md-2 form-group">
-                            <label for="tmct">抢单失效时间</label>
+                            <label for="workerTakeWaitTime">抢单失效时间</label>
                             <input type="text" class="form-control" data-container="body" data-toggle="popover"
                                    data-placement="bottom" data-content="不能为空"
-                                   onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="tmct" name="tmct">
+                                   onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="workerTakeWaitTime" name="workerTakeWaitTime">
                         </div>
                         <div class="col-lg-2 col-md-2 form-group">
                             <label for="sct">指定技师失效时间</label>
@@ -41,10 +41,10 @@
                                    onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="sct" name="sct">
                         </div>
                         <div class="col-lg-2 col-md-2 form-group">
-                            <label for="bfy">人工派单失效时间</label>
+                            <label for="manualAssignWaitTime">人工派单失效时间</label>
                             <input type="text" class="form-control" data-container="body" data-toggle="popover"
                                    data-placement="bottom" data-content="不能为空"
-                                   onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="bfy" name="bfy">
+                                   onkeyup="value=value.replace(/[^\-?\d.]/g,'')" id="manualAssignWaitTime" name="manualAssignWaitTime">
                         </div>
                         <div class="col-lg-2 col-md-2 form-group">
                             <label for="userCancelFeeB">技师已接单用户取消违约比例</label>
@@ -112,17 +112,18 @@
 <script src="boostrap/js/bootstrap.min.js"></script>
 <script src="boostrap/js/bootstrap-table.js"></script>
 <script>
+$(function(){
     var g_ArgPost = {} //全局参数
     window.parent.onAutoIframeHeight()
-    $(function () {
-        $.getJSON("/manageProject/getGlobal", {}, function (argPost) {
-            g_ArgPost = argPost
-            setInputValue(argPost)
-        })
+    $.getJSON("http://139.196.238.46:7001/api/getConfig", {}, function (argPost) {
+        g_ArgPost = argPost.d[0]
+        setInputValue(g_ArgPost)
     })
     function setInputValue(argPost) {
         document.getElementById("payExpiredTime").value = argPost.payExpiredTime || "";
         document.getElementById("orderWaitTime").value = argPost.orderWaitTime || "";
+        document.getElementById("workerTakeWaitTime").value = argPost.workerTakeWaitTime || "";
+        document.getElementById("manualAssignWaitTime").value = argPost.manualAssignWaitTime || "";
         document.getElementById("userCancelFeeA").value = argPost.userCancelFeeA || "";
         document.getElementById("userCancelFeeB").value = argPost.userCancelFeeB || "";
         document.getElementById("distanceConstraint").value = argPost.distanceConstraint || "";
@@ -156,6 +157,7 @@
     function onRest() {
         setInputValue(g_ArgPost)
     }
+})
 </script>
 
 </body>
