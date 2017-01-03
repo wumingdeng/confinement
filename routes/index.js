@@ -62,9 +62,24 @@ router.get('/countList', function(req, res, next) {
   res.render('countList', { title: 'Express' });
 });
 
-
 router.get('/setUsers', function(req, res, next) {
   res.render('setUsers', { title: 'Express' });
+});
+
+router.get('/setAntenatal', function(req, res, next) {
+  res.render('setAntenatal', { title: 'Express' });
+});
+
+router.get('/setFeedbackTemplate', function(req, res, next) {
+  res.render('setFeedbackTemplate', { title: 'Express' });
+});
+
+router.get('/antenatalList', function(req, res, next) {
+  res.render('antenatalList', { title: 'Express' });
+});
+
+router.get('/antenatalDo', function(req, res, next) {
+  res.render('antenatalDo', { title: 'Express' });
 });
 
 router.get('/out', function(req, res, next) {
