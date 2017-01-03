@@ -22,7 +22,6 @@ function onPostForm() {
     $.ajax({
         cache: true,
         type: "POST",
-        // url: '/manageProject/saveProject',
         url:'http://139.196.238.46:7001/api/reviewWorker'
         data: postData,// 你的formid
         async: false,

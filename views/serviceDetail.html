@@ -21,13 +21,17 @@
     <div class="templatemo-content-widget white-bg">
         <div class="panel panel-default no-border">
             <div class="panel-body">
-                <form class="templatemo-login-form">
+                <form class="templatemo-login-form" id="serviceForm">
                     <div class="row form-group">
                         <label class="col-lg-2  control-label" style="width: 100%;">服务项目图片上传</label>
+                        <div class="input-group-btn" >
+                            <div class="btn btn-file">
+                                <img id="desc_icon">
+                            </div>
+                        </div>
                         <div class="input-group-btn">
                             <div class="btn btn-file">
-                                <input id="imgfl" class="file" type="file" multiple="" data-preview-file-type="any"
-                                       data-upload-url="uploadFile" data-preview-file-icon="">
+                                <input id="imgfl" name="desc_icon" class="file" type="file" multiple="" data-preview-file-type="img" data-upload-url="uploadFile">
                             </div>
                         </div>
                     </div>
@@ -136,7 +140,6 @@
 <script src="boostrap/js/jquery.min.js"></script>
 <script src="boostrap/js/bootstrap.min.js"></script>
 <script src="boostrap/js/bootstrap-table.js"></script>
-<script src="js/webLogic.js"></script>
 <script src="boostrap/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 <script src="js/cookieUnit.js"></script>
 <script src="js/fileinput.min.js"></script>

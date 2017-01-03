@@ -20,12 +20,6 @@ $(function() {
         },
         onResetView: function () {
         }
-        // onDblClickRow: function (row, $element, field) {
-        //     // if (field == "id" || field == "name") {
-        //         findCountByOrderId(row.id) 
-        //     // }
-
-        // }
     })
     
     $("#submitAlert").click(function(){
@@ -46,22 +40,6 @@ $(function() {
     })
 })
 
-function findCountByOrderId(orderId){
-    // $('#countList').bootstrapTable('destroy')
-    // $('#countList').bootstrapTable({
-    //     method: 'get',
-    //     url: '/dataJson/count.json',
-    //     // sidePagination: "server",
-    //     dataType: "json",
-    //     pageSize:  10,
-    //     striped: true,
-    //     onLoadSuccess: function () {
-    //         window.parent.document.documentElement.scrollTop = window.parent.document.body.scrollTop = 1300
-    //     },
-    //     onResetView: function () {
-    //     }
-    // })
-}
 function tFormatter(value, row, index) {
     var newTime = new Date(Number(value));
     return newTime.getFullYear() + "-" + (newTime.getMonth() + 1) + "-" + newTime.getDate()
@@ -96,7 +74,7 @@ function operateFormatter(value, row, index) {
 
 window.operateEvents = {
     'click .enter': function (e, value, row, index) {
-        findCountByOrderId(row.id)
+        // findCountByOrderId(row.id)
     },
     'click .RoleOfEdit': function (e, value, row, index) {
         console.log(row.id)

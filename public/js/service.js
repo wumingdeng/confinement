@@ -31,7 +31,6 @@ $(function () {
 });
 
 
-
 function groupFormatter(value, row, index){
     switch(value){
         case "0":
@@ -75,7 +74,7 @@ window.operateEvents = {
         })
     },
     'click .RoleOfEdit': function (e, value, row, index) {
-        var myurl = "serviceDetail?id=" + row.id;
+        var myurl = "serviceDetail?id=" + JSON.stringify(row);
         window.location.assign(encodeURI(myurl));
     }
 };

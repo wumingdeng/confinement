@@ -1,23 +1,27 @@
 /**
  * Created by Fizzo on 16/12/8.
  */
-var isModify＝ false 
+var isModify = false 
+var g_argPost = {}
 $(function(){
     window.parent.onAutoIframeHeight(1700)
     
     var url = decodeURI(location.href);
     var tmp1 = url.split("?")[1];
-    var temp = tmp1.split("&")[0]
-    var sid = temp.split("=")[1];
-    if(sid){
-        $.getJson("",{id:sid},function(sData){
-            setInputValue(sData)
-        })
+
+    if (tmp1) {
+        isModify = true
+        var temp = tmp1.split("&")[0]
+        var rowStr = temp.split("=")[1];
+        g_argPost = JSON.parse(rowStr)
+        setInputValue(g_argPost)
     }
+
     function setInputValue(argPost) {
+        document.getElementById("desc_icon").src = argPost.desc_icon || "",
         document.getElementById("name").value = argPost.name || "";
         document.getElementById("desc_content").value = argPost.desc_content || "";
-        document.getElementById("origin_price").value = argPost.origin_price || "";
+        document.getElementById("origin_price").value = argPost.origin_price || 0;
         document.getElementById("cur_price").value = argPost.cur_price || "";
         document.getElementById("desc_fit").value = argPost.desc_fit || "";
         document.getElementById("video_url").value = argPost.video_url || "";
@@ -26,7 +30,6 @@ $(function(){
         document.getElementById("desc_service_time").value = argPost.desc_service_time || "";
         document.getElementById("desc_cancel").value = argPost.desc_cancel || "";
         document.getElementById("desc_long_distance").value = argPost.desc_long_distance || "";
-
         document.getElementById("desc_service_scale").value = argPost.desc_service_scale || "";
         document.getElementById("desc_night").value = argPost.desc_night || "";
         document.getElementById("desc_advice_period").value = argPost.desc_advice_period || "";
@@ -35,26 +38,20 @@ $(function(){
 })
 
 function onPostForm() {
-    if (!onValidator()) return
-    
-    $.ajax({
-        cache: true,
-        type: "POST",
-        url: '/manageProject/saveProject',
-        data: postData,// 你的formid
-        async: false,
-        error: function (request) {
+    var postData =  $("#serviceForm").serializeArray()
+    var values = {};
+    for (var item in postData) {
+        values[postData[item].name] = postData[item].value;
+    }
+    $.post('http://139.196.238.46:7001/api/modService',{sid:g_argPost.id,param:values},function(result){
+        if(result.ok == 1){
+            alert("修改成功");
+            var myurl = "setService"
+            window.location.assign(encodeURI(myurl));
+        }else{
             alert("修改失败");
-        },
-        success: function (data) {
-            if(data.ok == 0){
-                alert('修改失败')
-            }else {
-                var myurl = "defaul-project?name=" + document.getElementById("pn").value;
-                window.location.assign(encodeURI(myurl));
-            }
         }
-    });
+    },"json")
 }
 
 
@@ -64,13 +61,7 @@ function onRest() {
     setInputValue(g_argPost)
 }
 function onBack() {
-    var myurl = ""
-    if (isModify) {
-        window.parent.onLoading("show")
-        myurl = "defaul-project?name=" + document.getElementById("pn").value;
-    } else {
-        myurl = "/manage-project";
-    }
+    var myurl = "setService"
     window.location.assign(encodeURI(myurl));
 }
 function getCookie(name) {

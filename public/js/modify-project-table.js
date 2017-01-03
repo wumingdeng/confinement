@@ -14,40 +14,29 @@ $(function () {
 
     $button.click(function () {
         setTableVariable(swiperData)
-        $table.bootstrapTable('insertRow',{index:swiperData.length,row:{id:_Id++}});
+        $table.bootstrapTable('insertRow',{index:swiperData.length,row:{id:--_Id}});
         window.parent.onAutoIframeHeight() //设置Iframe的高度
         addYearCar++
     });
 
-    $('#btn_service').click(function(){
-        setTableVariable(servicesData)
-        $('#xsTable').bootstrapTable('insertRow',{index:servicesData.length,row:{id:_Id++}});
-        window.parent.onAutoIframeHeight() //设置Iframe的高度
-        addService++
-    })
+    // $('#btn_service').click(function(){
+    //     setTableVariable(servicesData)
+    //     $('#xsTable').bootstrapTable('insertRow',{index:servicesData.length,row:{id:--_Id}});
+    //     window.parent.onAutoIframeHeight() //设置Iframe的高度
+    //     addService++
+    // })
 
-    $('#xsTable').bootstrapTable('hideColumn',"id");
+    // $('#xsTable').bootstrapTable('hideColumn',"id");
     $table.bootstrapTable('hideColumn', 'id');
 
     $.get("http://139.196.238.46:7001/api/getswipe",{},function(params){
         swiperData = params.ok
         $table.bootstrapTable("load",swiperData)
     })
-     
-
-// $('#xsTable').bootstrapTable('destroy')
-//     $('#xsTable').bootstrapTable({
-//         method: 'post',
-//         url: 'http://139.196.238.46:7001/api/getswipe',
-//         sidePagination: "server",
-//         dataType: "json",
-//         pageSize:  10,
-//         striped: true,
-//         onLoadSuccess: function () {
-//         },
-//         onResetView: function () {
-//         }
-//     })
+    //  $.get("http://139.196.238.46:7001/api/getCatalogs",{},function(params){
+    //     servicesData = params.rows
+    //     $('#xsTable').bootstrapTable("load",servicesData)
+    // })
 
 });
 
@@ -65,20 +54,11 @@ function xsOperateFormatter(value, row, index) {
     ].join('');
 }
 
-function inputFormatter(dataFile,index){
+function inputFormatter(dataFile,index,arrData){
     var id = dataFile+"_"+index
     var val = ""
-    if(swiperData && swiperData[index]){
-        val = swiperData[index][dataFile] || ""
-    }
-    return "<input type='text' class='form-control' data-container='body' data-toggle='popover' data-placement='bottom' data-content='不能为空' style='width: 100%' id='"+id+"' value='"+val+"' name='"+dataFile+"'>"
-}
-
-function inputFormatter1(dataFile,index){
-    var id = dataFile+"_"+index
-    var val = ""
-    if(servicesData && servicesData[index]){
-        val = servicesData[index][dataFile] || ""
+    if(arrData && arrData[index]){
+        val = arrData[index][dataFile] || ""
     }
     return "<input type='text' class='form-control' data-container='body' data-toggle='popover' data-placement='bottom' data-content='不能为空' style='width: 100%' id='"+id+"' value='"+val+"' name='"+dataFile+"'>"
 }
@@ -91,7 +71,7 @@ function fileImageFormatter(dataFile,index,arrData){
         val = arrData[index][dataFile] || ""
     }
     // return "<img id='"+id+"' URL='"+val+"'>"
-    return "<input class='file' type='file' multiple='' data-preview-file-type='any' data-upload-url='#' data-preview-file-icon='' name='"+dataFile+"'>"
+    return "<input class='file' type='file' multiple='' data-preview-file-type='any' data-upload-url='#' data-preview-file-icon='' id='"+id+"' name='"+dataFile+"'>"
 }
 
 function selectFormatter(value,dataFile,index){
@@ -109,39 +89,46 @@ function selectFormatter(value,dataFile,index){
 }
 
 function k1Formatter(value, row, index){
-    
     return fileImageFormatter("url",index,swiperData)
 }
 function k2Formatter(value, row, index){
-     return inputFormatter("linkAdr",index)
+     return inputFormatter("linkAdr",index,swiperData)
 }
 function k3Formatter(value, row, index){
 
-    return inputFormatter("idx",index)
+    return inputFormatter("idx",index,swiperData)
 }
 function k4Formatter(value, row, index){
     return selectFormatter(value,"place",index)
 }
 function k5Formatter(value, row, index){
-    return inputFormatter("showtime",index)
+    return inputFormatter("showtime",index,swiperData)
 }
 
+
 function nameFormatter(value,row,index){
-    return inputFormatter1("name",index)
+    return inputFormatter("name",index,servicesData)
 }
 function addrFormatter(value,row,index){
-    return fileImageFormatter("adr",index,servicesData)
+    return fileImageFormatter("iconurl",index,servicesData)
 }
 function idxFormatter(value,row,index){
-    return inputFormatter1("idx",index)
+    return inputFormatter("place",index,servicesData)
 }
 
 
 window.operateEvents = {
     'click .RoleOfA': function (e, value, row, index) {
         setTableVariable(swiperData)
-        swiperData.splice(index,1)
-        $.post("http://139.196.238.46:7001/api/delswipe",{id:row.id},function(params){
+        if(row.id<0){
+            $('#table').bootstrapTable('remove', {
+                field: 'id',
+                values: [row.id]
+            });
+            addYearCar--
+            swiperData.splice(index,1)
+        }else{
+            $.post("http://139.196.238.46:7001/api/delswipe",{id:row.id},function(params){
             if(params.err){
                 alert("删除失败")
             }else if(params.ok==1){
@@ -151,12 +138,23 @@ window.operateEvents = {
                     values: [row.id]
                 });
                 addYearCar--
+                swiperData.splice(index,1)
             }
         },"json")
+        }
+        
     },
     'click .RoleOfB': function (e, value, row, index) {
         var postData = getTablePostVariable("table",index)
-        $.post("http://139.196.238.46:7001/api/addswipe",postData,function(params){
+        postData['id'] = swiperData[index]['id']
+        var postUrl = ""
+        if(postData['id']>0){
+            postUrl =  "http://139.196.238.46:7001/api/modswipe"
+        }else{
+            delete postData.id
+            postUrl =  "http://139.196.238.46:7001/api/addswipe"
+        }
+        $.post(postUrl,postData,function(params){
             if(params.err){
                 alert("添加失败")
             }else{
@@ -167,23 +165,41 @@ window.operateEvents = {
     },
     'click .RoleOfC': function (e, value, row, index) {
         setTableVariable(servicesData)
-        servicesData.splice(index,1)
-        $.post("http://139.196.238.46:7001/api/delswipe",{id:row.id},function(params){
+       
+        if(row.id<0){
+            $('#xsTable').bootstrapTable('remove', {
+                field: 'id',
+                values: [row.id]
+            });
+             servicesData.splice(index,1)
+            addService--
+        }else{
+            $.post("http://139.196.238.46:7001/api/delswipe",{id:row.id},function(params){
             if(params.err){
                 alert("删除失败")
             }else if(params.ok==1){
                 alert("删除成功")
                 $('#xsTable').bootstrapTable('remove', {
-                    field: '_id',
-                    values: [row._id]
+                    field: 'id',
+                    values: [row.id]
                 });
+                servicesData.splice(index,1)
                 addService--
             }
-        })
-        
+        },"json")
+        }
     },
     'click .RoleOfD': function (e, value, row, index) {
-        $.post("http://139.196.238.46:7001/api/addswipe",servicesData[index],function(params){
+        var postData = getTablePostVariable("xsTable",index)
+        postData['id'] = swiperData[index]['id']
+        var postUrl = ""
+        if(postData['id']>0){
+            postUrl =  "http://139.196.238.46:7001/api/modswipe"
+        }else{
+            delete postData.id
+            postUrl =  "http://139.196.238.46:7001/api/addswipe"
+        }
+        $.post(postUrl,postData,function(params){
             if(params.err){
                 alert("添加失败")
             }else{

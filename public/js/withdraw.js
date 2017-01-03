@@ -3,7 +3,7 @@ var wdId = 0
 $(function(){
     window.parent.onAutoIframeHeight(750)
     $("#submitAlert").click(function(){
-        $.post("http://139.196.238.46:7001/api/reviewPayRecords",{id:,pass:approve},function(){
+        $.post("http://139.196.238.46:7001/api/reviewPayRecords",{id:wdId,pass:approve},function(){
             loadWithdraw()
         },"json")
        
@@ -51,7 +51,8 @@ function sFormatter(value, row, index){
     }
 }
 
-function submitWithdraw(wId){
+function submitWithdraw(){
+     
     if(approve == 1){
         document.getElementById("alertText").innerHTML ="你确定批准该条提现申请";
     }else{
@@ -70,11 +71,13 @@ function operateFormatter(value, row, index) {
 window.operateEvents = {
     'click .RoleOfA': function (e, value, row, index) {
         approve = 1
+        wdId= row.id
         submitWithdraw(row.id)
     },
     'click .enter': function (e, value, row, index) {
         approve = 0
-        submitWithdraw(row.id)
+        wdId= row.id
+        submitWithdraw()
     }
     
 };

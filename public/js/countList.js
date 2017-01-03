@@ -9,16 +9,17 @@ $(function() {
     $('#countList').bootstrapTable('destroy')
     $('#countList').bootstrapTable({
         method: 'post',
-        url:"http://139.196.238.46:7001/api/getWorkerSettleRecord",
+        // url:"http://139.196.238.46:7001/api/getWorkerSettleRecord",
+        url:"http://localhost:7001/api/getWorkerSettleRecord",
         sidePagination: "server",
         dataType: "json",
         pageSize:  10,
         striped: true,
         search:true,
-        queryParams:function(params){
-            params.wid = 1
-            return params
-        },
+        // queryParams:function(params){
+        //     params.wid = 1
+        //     return params
+        // },
         searchOnEnterKey:true,
         showColumns:true,
         onLoadSuccess: function () {
@@ -30,27 +31,27 @@ $(function() {
 
 })
 
-function findCountByOrderId(orderId){
-    function getParams() {
+// function findCountByOrderId(orderId){
+//     function getParams() {
 
-        return orderId;
-    }
-    $('#countList').bootstrapTable('destroy')
-    $('#countList').bootstrapTable({
-        method: 'get',
-        url: '/dataJson/count.json',
-        // sidePagination: "server",
-        queryParams:getParams,
-        dataType: "json",
+//         return orderId;
+//     }
+//     $('#countList').bootstrapTable('destroy')
+//     $('#countList').bootstrapTable({
+//         method: 'get',
+//         url: '/dataJson/count.json',
+//         // sidePagination: "server",
+//         queryParams:getParams,
+//         dataType: "json",
 
-        pageSize:  10,
-        striped: true,
-        onLoadSuccess: function () {
-        },
-        onResetView: function () {
-        }
-    })
-}
+//         pageSize:  10,
+//         striped: true,
+//         onLoadSuccess: function () {
+//         },
+//         onResetView: function () {
+//         }
+//     })
+// }
 
 function tFormatter(value, row, index) {
     var newTime = new Date(Number(value));
@@ -86,7 +87,7 @@ function operateFormatter(value, row, index) {
 
 window.operateEvents = {
     'click .enter': function (e, value, row, index) {
-        findCountByOrderId(row.id)
+        // findCountByOrderId(row.id)
     },
     'click .RoleOfEdit': function (e, value, row, index) {
         console.log(row.id)

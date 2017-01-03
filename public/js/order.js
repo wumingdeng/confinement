@@ -8,12 +8,14 @@ $(function() {
 
     $('#orderTable').bootstrapTable('destroy')
     $('#orderTable').bootstrapTable({
-        method: 'post',
+        method: 'get',
+        // url: '/dataJson/order.json',
         url: 'http://139.196.238.46:7001/api/getOrdersNeedHandle',
         sidePagination: "server",
         dataType: "json",
         pageSize:  10,
         striped: true,
+        clickToSelect: true,
         onLoadSuccess: function () {
         },
         onResetView: function () {
@@ -28,13 +30,22 @@ $(function() {
     })
 
     $("#searchT").click(function(){
+        var name = document.getElementById("inputName").value
+        var freeIdx = document.getElementById("free").selectedIndex
+        var ga = document.getElementById("selectRight").selectedIndex
         $('#tTable').bootstrapTable('destroy')
         $('#tTable').bootstrapTable({
-            method: 'get',
-            url: '/dataJson/order.json',
-            // sidePagination: "server",
+            method: 'post',
+            url: 'http://139.196.238.46:7001/api/getWorkerByCondition',
+            sidePagination: "server",
             dataType: "json",
             pageSize:  10,
+            queryParams:function(param){
+                param.free=freeIdx
+                param.name=name
+                param.goodAt=ga
+                return param
+            }
             striped: true,
             onLoadSuccess: function () {
             },

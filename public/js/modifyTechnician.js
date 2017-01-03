@@ -17,33 +17,43 @@ $(function(){
         var rowStr = temp.split("=")[1];
         g_argPost = JSON.parse(rowStr)
     }
-
-    
-    // $.getJSON("/manageProject/getProjectByName", {pn: name}, function (argPost) {
-    //     argPost = argPost.rows.arg;
-    //     g_argPost = argPost
-        setInputValue(g_argPost)
-    // })
+    setInputValue(g_argPost) 
 })
 function onPostForm() {
-    $.ajax({
-        cache: true,
-        type: "POST",
-        url: '/manageProject/saveProject',
-        data: postData,// 你的formid
-        async: false,
-        error: function (request) {
-            alert("修改失败");
-        },
-        success: function (data) {
-            if(data.ok == 0){
-                alert('修改失败')
-            }else {
-                var myurl = "defaul-project?name=" + document.getElementById("pn").value;
-                window.location.assign(encodeURI(myurl));
-            }
+    var postData =  $("#modifyForm").serializeArray()
+    var values = {};
+    for (var item in postData) {
+        values[postData[item].name] = postData[item].value;
+    }
+    var param = {id:g_argPost.id,p:values}
+    // var str = JSON.stringify(param)
+    // var obj = JSON.parse(str);
+    $.post("http://localhost:7001/api/modWorker",param,function(result){
+        if(data.ok == 0){
+            alert('修改失败')
+        }else {
+            var myurl = "";
+            window.location.assign(encodeURI(myurl));
         }
-    });
+    })
+    // $.ajax({
+    //     cache: true,
+    //     type: "POST",
+    //     url: 'http://localhost:7001/api/modWorker',
+    //     data: param,
+    //     async: false,
+    //     error: function (request) {
+    //         alert("修改失败");
+    //     },
+    //     success: function (data) {
+    //         if(data.ok == 0){
+    //             alert('修改失败')
+    //         }else {
+    //             var myurl = "";
+    //             window.location.assign(encodeURI(myurl));
+    //         }
+    //     }
+    // });
 }
 
 function setInputValue(argPost) {
@@ -59,8 +69,8 @@ function setInputValue(argPost) {
     document.getElementById("address").value = argPost.address || "";
     document.getElementById("keshi").value = argPost.keshi || "";
     document.getElementById("content").value = argPost.content || "";
-    
 }
+
 //复写重置方法
 function onRest() {
     setInputValue(g_argPost)
@@ -68,10 +78,9 @@ function onRest() {
 function onBack() {
     var myurl = ""
     if (isModify) {
-        window.parent.onLoading("show")
-        myurl = "defaul-project?name=" + document.getElementById("pn").value;
+        myurl = "setTechnician";
     } else {
-        myurl = "/manage-project";
+        myurl = "setTechnician";
     }
     window.location.assign(encodeURI(myurl));
 }
