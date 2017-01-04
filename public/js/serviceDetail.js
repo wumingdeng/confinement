@@ -43,15 +43,28 @@ function onPostForm() {
     for (var item in postData) {
         values[postData[item].name] = postData[item].value;
     }
-    $.post('http://139.196.238.46:7001/api/modService',{sid:g_argPost.id,param:values},function(result){
-        if(result.ok == 1){
-            alert("修改成功");
-            var myurl = "setService"
-            window.location.assign(encodeURI(myurl));
-        }else{
+    var param = {sid:g_argPost.id,param:values}
+    var str = JSON.stringify(param)
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: 'http://139.196.238.46:7001/api/modService',
+        data: str,
+        async: false,
+        dataType:"json",
+        contentType: "application/json; charset=utf-8",
+        error: function (request) {
             alert("修改失败");
+        },
+        success: function (data) {
+            if(data.err == 999){
+                alert('修改失败')
+            }else {
+                var myurl = "";
+                window.location.assign(encodeURI(myurl));
+            }
         }
-    },"json")
+    });
 }
 
 

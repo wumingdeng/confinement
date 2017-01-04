@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="boostrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="boostrap/css/bootstrap-table.css">
+    <link href="boostrap/css/templatemo-style.css" rel="stylesheet">
+    <link href="boostrap/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/modalExtra.css" rel="stylesheet">
+</head>
+<body style="background-color: transparent">
+
+<div class="templatemo-flex-row">
+    <div class="templatemo-content col-1 light-gray-bg">
+        <div class="templatemo-content-widget white-bg no-border">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <button id="btn_swiper" onclick='addConfig(this)' class="btn btn-default">添加产检</button>
+                    <div class="panel-body" id="prForm">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="boostrap/js/jquery.min.js"></script>
+<script src="boostrap/js/bootstrap.min.js"></script>
+<script src="boostrap/js/bootstrap-table.js"></script>
+<script src="boostrap/bootstrap-table-zh-CN.js"></script>
+<script src="boostrap/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+<script src="js/cookieUnit.js"></script>
+<script>
+    var g_params = {}
+    var deleteIdx = []
+    
+    $(function(){
+        window.parent.onAutoIframeHeight(1200)
+        $.getJSON("http://139.196.238.46:7001/api/getCareConfig",{},function(res){
+            g_params = res
+            for(var _v in res){
+                var data = res[_v]
+                create(data)
+            }
+        })
+    })
+    function addConfig(self){
+        var data = {sid:"",weeks:"",content:""}
+        create(data)
+    }
+    var addIdx=0 //添加的个数
+    function create(data){
+        
+        var row = document.createElement('div')
+        row.setAttribute("class", "row form-group")
+        function onC(title, strId,value) {
+            var div = document.createElement('div')
+            var label = document.createElement('label')
+            label.setAttribute('for', strId)
+            label.innerHTML = title
+            var input = document.createElement('input')
+            input.setAttribute('class', 'form-control')
+            input.setAttribute('id', strId +"_"+addIdx)
+            input.setAttribute('name', strId)
+            input.setAttribute('value', value)
+            div.appendChild(label)
+            div.appendChild(input)
+            div.setAttribute("class", "col-lg-2 col-md-2 form-group")
+            div.setAttribute('style', "float: left")
+            row.appendChild(div)
+        }
+        onC("产检编号", "sid",data.sid)
+        onC("产检时间", "weeks",data.weeks)
+        onC("产检内容", "content",data.content)
+        var div = document.createElement('div')
+        var button = document.createElement('button')
+        button.setAttribute('class', 'templatemo-blue-button')
+        button.setAttribute('id', 'btn_'+addIdx)
+        button.setAttribute('style', "margin-top: 20px")
+        button.innerHTML = "保存"
+        button.onclick = function(){
+            buttonClick()
+        }
+        // button.setAttribute('onclick',buttonClick(addIdx))
+        div.appendChild(button)
+        div.setAttribute("class", "col-lg-2 col-md-2 form-group")
+        div.setAttribute('style', "float: left")
+        row.appendChild(div)
+        document.getElementById('prForm').appendChild(row)
+        addIdx++
+    }
+    function orignEque(arg1,arg2,arg3,temp){
+        return temp.sid == arg1 && temp.weeks==arg2 && temp.content==arg3
+    }
+    function buttonClick(){
+        // var _self = this
+        var idx = event.currentTarget.id.split('_')[1]
+        var _url = ""
+        var isMod = false
+        var _sid=document.getElementById("sid_"+idx).value
+        var _weeks=document.getElementById("weeks_"+idx).value
+        var _content=document.getElementById("content_"+idx).value
+        
+        var postParam = {sid:_sid,weeks:_weeks,content:_content}
+        if(g_params[idx]){
+            if(orignEque(_sid,_weeks,_content,g_params[idx])){
+                alert("没有修改过")
+                return 
+            }
+            isMod = true
+            _url = "http://139.196.238.46:7001/api/modCareConfig"
+        }else{
+            isMod = false
+            _url = "http://139.196.238.46:7001/api/addCareConfig"
+        }
+        $.post(_url,postParam,function(res){
+            if(res.err == 999 || res.err == 998){
+                alert('保存失败')
+            }else{
+                if(isMod){
+                    g_params[idx] = postParam
+                }else{
+                    g_params.push(res)
+                }
+                alert('保存成功')
+            }
+        },'json')
+    }
+</script>
+</body>
+</html>

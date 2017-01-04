@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="boostrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="boostrap/css/bootstrap-table.css">
+    <link href="boostrap/css/templatemo-style.css" rel="stylesheet">
+    <link href="boostrap/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/modalExtra.css" rel="stylesheet">
+</head>
+<body style="background-color: transparent">
+
+<div class="templatemo-flex-row">
+    <div class="templatemo-content col-1 light-gray-bg">
+        <div class="templatemo-content-widget white-bg no-border">
+            <div class="panel panel-default" id="pnl">
+                <div class='panel-body'>
+                    <button onclick="addTechennicaTemplate" class="templatemo-blue-button">添加技师类型</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="boostrap/js/jquery.min.js"></script>
+<script src="boostrap/js/bootstrap.min.js"></script>
+<script src="boostrap/js/bootstrap-table.js"></script>
+<script src="boostrap/bootstrap-table-zh-CN.js"></script>
+<script src="boostrap/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+<script src="js/cookieUnit.js"></script>
+<script>
+    $(function(){
+        window.parent.onAutoIframeHeight(1800)
+        var g_Params = {}
+        // {"type":1,"names":{"a":{"k":1,"content":"s1|s2|s3"},"b":{"k":2},"c":{"k":3,"content":"a1|a2|a3|a4"}}}
+        $.getJSON("http://139.196.238.46:7001/api/getServiceTemplate",{},function(res){
+            for(var p in res){
+                var data = res[p]
+                create(data)
+            }
+        })
+    })
+    var addIdx = 0
+    
+    var inputTypeArr = ['下拉框','文本框','复选框','单选框']
+    function create(data){
+        var pnl = document.createElement('div')
+        pnl.setAttribute("class", "panel panel-default")
+        pnl.setAttribute("style", "margin: 20px")
+        var div = document.createElement('div')
+        document.getElementById('pnl').appendChild(pnl)
+        for(var _v in data.names){
+            onCreateRow(pnl,data.names[_v],_v)
+        }
+        addIdx++
+    }
+    function onCreateRow(pnl,data,v){
+        var row = document.createElement('div')
+        row.setAttribute("class", "row form-group")
+        row.setAttribute("style", "margin: 20px")
+        function onC(title, strId,value,type) {
+            var div = document.createElement('div')
+            var label = document.createElement('label')
+            label.setAttribute('for', strId)
+            label.innerHTML = title
+            var input = document.createElement(type)
+            input.setAttribute('class', 'form-control')
+            input.setAttribute('id', strId +"_"+addIdx)
+            input.setAttribute('name', strId)
+            if(type=="select"){
+                var option = document.createElement("option")
+                option.innerHTML = inputTypeArr[Number(value)];
+                option.value = value;
+                input.appendChild(option);
+            }else{
+
+                input.setAttribute('value', value||"")
+            }
+            div.appendChild(label)
+            div.appendChild(input)
+            div.setAttribute("class", "col-lg-2 col-md-2 form-group")
+            div.setAttribute('style', "float: left")
+            row.appendChild(div)
+        }
+        onC("标题", "key",v,'input')
+        onC("类型", "k",data.k,'select')
+        onC("内容", "content",data.content,'input')
+        pnl.appendChild(row)
+    }
+    function addTechennicaTemplate(){
+
+    }
+</script>
+</body>
+</html>

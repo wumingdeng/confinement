@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="boostrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="boostrap/css/bootstrap-table.css">
+    <link href="boostrap/css/templatemo-style.css" rel="stylesheet">
+    <link href="boostrap/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/modalExtra.css" rel="stylesheet">
+</head>
+
+<body style="background-color: transparent">
+    <div class="templatemo-flex-row">
+        <div class="templatemo-content col-1 light-gray-bg">
+            <div class="templatemo-content-widget white-bg no-border">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>产检列表</h3>
+                        <table id="antenataTable" class="table table-striped table-bordered templatemo-user-table" data-toggle="table" data-page-list="[10]"
+                            data-pagination="true" data-height="auto">
+                            <thead>
+                                <tr>
+                                    <th data-field="id">产检号</th>
+                                    <th data-field="care_extra">陪诊备注</th>
+                                    <th data-field="care_images">检查报告</th>
+                                    <th data-field="orderid">关联订单号</th>
+                                    <th data-field="user_confirm_end">用户确认结束时间</th>
+                                    <th data-field="first_inform_end">第一次通知时间点</th>
+                                    <th data-field="care_cfg_id">产检次数</th>
+                                    <th data-field="schedule_time">计划的产检时间</th>
+                                    <th data-field="staff_id">服务陪诊人员</th>
+                                    <th data-field="care_time">服务陪诊时间</th>
+                                    <th data-field="staff_wxid" data-formatter="conectFormatter"></th>
+                                    <th data-field="status" data-formatter="sFormatter">状态</th>
+                                    <th data-field="createtime" data-formatter="tFormatter">下单时间</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <!-- 模态框（Modal） -->
+                <div class="modal fade" id="alertSumbmit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="panel-heading">
+                                <h2 class="text-uppercase" id="sendTN"></h2>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="submitAlert">确定</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal -->
+                </div>
+
+                <div class="modal fade" id="changeTechnician" tabindex="-2" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="panel-heading">
+                                <h2 class="text-uppercase">选择技师</h2>
+                            </div>
+                            <div class="panel-body">
+                                <form class="templatemo-login-form">
+                                    <div class="form-group">
+                                        技师列别:
+                                        <select id="free">
+                                        <option value="0">中医师</option>
+                                        <option value="1">营养师</option>
+                                        <option value="1">新生儿医生</option>
+                                    </select>
+                                    </div>
+                                </form>
+                                <div class="panel-body">
+                                    <h4>双击列表选择技师</h4>
+                                    <table id="tTable" class="table table-striped table-bordered templatemo-user-table" data-toggle="table" data-page-list="[10]"
+                                        data-pagination="true" data-height="auto" data-click-to-select="true">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="idx" data-radio="true">选择</th>
+                                                <th data-field="id">技师号</th>
+                                                <th data-field="name">技师名称</th>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="boostrap/js/jquery.min.js"></script>
+    <script src="boostrap/js/bootstrap.min.js"></script>
+    <script src="boostrap/js/bootstrap-table.js"></script>
+    <script src="boostrap/bootstrap-table-zh-CN.js"></script>
+    <script src="boostrap/js/templatemo-script.js"></script>
+    <!-- Templatemo Script -->
+    <script src="js/cookieUnit.js"></script>
+    <script>
+        $(function(){
+            window.parent.onAutoIframeHeight(800)
+
+            $('#antenataTable').bootstrapTable('destroy')
+            $('#antenataTable').bootstrapTable({
+                method: 'post',
+                url: 'http://139.196.238.46:7001/api/getOrders',
+                sidePagination: "server",
+                dataType: "json",
+                pageSize:  10,
+                striped: true,
+                onLoadSuccess: function () {
+                },
+                onResetView: function () {
+                }
+            })
+            
+            $("#submitAlert").click(function(){
+                $.post("http://139.196.238.46:7001/api/assignWorker",{oid:selectOid,wid:selectWid},function(data){
+                    $("#alertSumbmit").modal('hide')
+                },"json")
+            })
+            $("#searchT").click(function(){
+            var freeIdx = document.getElementById("free").selectedIndex
+            $('#tTable').bootstrapTable('destroy')
+            $('#tTable').bootstrapTable({
+                method: 'post',
+                url: 'http://139.196.238.46:7001/api/getWorkerByCondition',
+                sidePagination: "server",
+                dataType: "json",
+                pageSize:  10,
+                queryParams:function(param){
+                    param.free=freeIdx
+                    return param
+                }
+                striped: true,
+                onLoadSuccess: function () {
+                },
+                onResetView: function () {
+                },
+                onDblClickRow: function (row, $element, field) {
+                    window.parent.document.documentElement.scrollTop = window.parent.document.body.scrollTop = 0
+                    $('#changeTechnician').modal('hide')
+                    document.getElementById("sendTN").innerHTML ="你确定为"+ row.name+"派发该订单";
+                    $("#alertSumbmit").modal('show')
+                }
+            })
+        })
+    })
+
+</script>
+</body>
+
+</html>

@@ -26,34 +26,27 @@ function onPostForm() {
         values[postData[item].name] = postData[item].value;
     }
     var param = {id:g_argPost.id,p:values}
-    // var str = JSON.stringify(param)
-    // var obj = JSON.parse(str);
-    $.post("http://localhost:7001/api/modWorker",param,function(result){
-        if(data.ok == 0){
-            alert('修改失败')
-        }else {
-            var myurl = "";
-            window.location.assign(encodeURI(myurl));
+    var str = JSON.stringify(param)
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: 'http://139.196.238.46:7001/api/modWorker',
+        data: str,
+        async: false,
+        dataType:"json",
+        contentType: "application/json; charset=utf-8",
+        error: function (request) {
+            alert("修改失败");
+        },
+        success: function (data) {
+            if(data.err == 999){
+                alert('修改失败')
+            }else {
+                var myurl = "";
+                window.location.assign(encodeURI(myurl));
+            }
         }
-    })
-    // $.ajax({
-    //     cache: true,
-    //     type: "POST",
-    //     url: 'http://localhost:7001/api/modWorker',
-    //     data: param,
-    //     async: false,
-    //     error: function (request) {
-    //         alert("修改失败");
-    //     },
-    //     success: function (data) {
-    //         if(data.ok == 0){
-    //             alert('修改失败')
-    //         }else {
-    //             var myurl = "";
-    //             window.location.assign(encodeURI(myurl));
-    //         }
-    //     }
-    // });
+    });
 }
 
 function setInputValue(argPost) {
