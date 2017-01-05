@@ -9,8 +9,6 @@ $(function(){
     var name = ""
     var url = decodeURI(location.href);
     var tmp1 = url.split("?")[1];
-    
-
     if (tmp1) {
         isModify = true
         var temp = tmp1.split("&")[0]

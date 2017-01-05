@@ -16,9 +16,89 @@
         <div class="templatemo-content-widget white-bg no-border">
             <div class="panel panel-default" id="pnl">
                 <div class='panel-body'>
-                    <button onclick="addTechennicaTemplate" class="templatemo-blue-button">添加技师类型</button>
+                    <h3>产检列表</h3>
+                    <table id="table" class="table table-striped table-bordered templatemo-user-table" data-toggle="table" data-page-list="[10]"
+                        data-pagination="true" data-height="auto">
+                        <thead>
+                            <tr>
+                                <th data-field="id">序号</th>
+                                <th data-field="type" data-formatter='typeFormatter'>技师类型</th>
+                                <th data-field="t">标题</th>
+                                <th data-field="k" data-formatter='inputTypeFormatter'>类型</th>
+                                <th data-field="content">内容</th>
+                                <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">操作</th>
+                            </tr>
+                        </thead>
+                    </table>
+                     <div class="bs-bars pull-left">
+                        <div id="toolbar">
+                            <button id="addNew" onclick="addTemplate()"  class="btn btn-success">
+                                <i class="glyphicon glyphicon-plus"></i> 添加
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <!-- 模态框（Modal） -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="panel-heading"><h2 class="text-uppercase" id='savaTitle'></h2></div>
+                    <div class="panel-body">
+                        <form class="templatemo-login-form" id='saveTemp'>
+                            <div class="form-group">
+                                <label for="newPwd">技师类型</label>
+                                <select name="type" id="type">
+                                    <option value="1">中医师</option>
+                                    <option value="2">营养师</option>
+                                    <option value="3">新生儿医生</option>
+                                    <option value="4">技师</option>
+                                </select>
+                                <!--<input type="text" class="form-control" name="type" id="type">-->
+                            </div>
+                            <div class="form-group">
+                                <label for="newPwd">标题</label>
+                                <input type="text" class="form-control" name="t" id="t">
+                            </div>
+                            
+                            <div class="form-group">
+                                类型:
+                                <select name="k" id="k">
+                                    <option value="1">下拉框</option>
+                                    <option value="2">文本框</option>
+                                    <option value="3">复选框</option>
+                                    <option value="4">单选框</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPwd">内容</label>
+                                <input type="text" class="form-control" name="content" id="content">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" onclick="saveTemplate()" class="btn btn-primary" id="btnEditUser">提交</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+        <div class="modal fade" id="removeUserModel" tabindex="-1" role="dialog">
+            <div class="modal-dialog Absolute-Center" style="height: 25%">
+                <div class="modal-content">
+                    <div class="panel-heading"><h2 class="text-uppercase">删除用户</h2></div>
+                    <div class="panel-body">
+                        <h1>真的要删除此人?</h1>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" id="btnRemoveUser">确定</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
         </div>
     </div>
 </div>
@@ -29,66 +109,179 @@
 <script src="boostrap/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 <script src="js/cookieUnit.js"></script>
 <script>
+    var isMod = false
+    var modRowIdx = -1
+    var resParam ={}
+    var $table=$("#table")
     $(function(){
         window.parent.onAutoIframeHeight(1800)
-        var g_Params = {}
-        // {"type":1,"names":{"a":{"k":1,"content":"s1|s2|s3"},"b":{"k":2},"c":{"k":3,"content":"a1|a2|a3|a4"}}}
+        
+        var g_Params = []
         $.getJSON("http://139.196.238.46:7001/api/getServiceTemplate",{},function(res){
-            for(var p in res){
-                var data = res[p]
-                create(data)
-            }
+            resParam = res
+            resConArr(res,g_Params)
+            $table.bootstrapTable("load",g_Params)
         })
     })
-    var addIdx = 0
-    
-    var inputTypeArr = ['下拉框','文本框','复选框','单选框']
-    function create(data){
-        var pnl = document.createElement('div')
-        pnl.setAttribute("class", "panel panel-default")
-        pnl.setAttribute("style", "margin: 20px")
-        var div = document.createElement('div')
-        document.getElementById('pnl').appendChild(pnl)
-        for(var _v in data.names){
-            onCreateRow(pnl,data.names[_v],_v)
-        }
-        addIdx++
-    }
-    function onCreateRow(pnl,data,v){
-        var row = document.createElement('div')
-        row.setAttribute("class", "row form-group")
-        row.setAttribute("style", "margin: 20px")
-        function onC(title, strId,value,type) {
-            var div = document.createElement('div')
-            var label = document.createElement('label')
-            label.setAttribute('for', strId)
-            label.innerHTML = title
-            var input = document.createElement(type)
-            input.setAttribute('class', 'form-control')
-            input.setAttribute('id', strId +"_"+addIdx)
-            input.setAttribute('name', strId)
-            if(type=="select"){
-                var option = document.createElement("option")
-                option.innerHTML = inputTypeArr[Number(value)];
-                option.value = value;
-                input.appendChild(option);
-            }else{
-
-                input.setAttribute('value', value||"")
+    function resConArr(res,arr){
+        for(var p in res){
+            var data = res[p]
+            var idx = 0
+            for(var _v in data.names){
+                var tempObj = {}
+                tempObj['id']=idx
+                tempObj['type'] = data.type
+                tempObj['t'] = _v
+                tempObj['k'] = data.names[_v].k
+                tempObj['content'] = data.names[_v].content
+                arr.push(tempObj)
+                idx++
             }
-            div.appendChild(label)
-            div.appendChild(input)
-            div.setAttribute("class", "col-lg-2 col-md-2 form-group")
-            div.setAttribute('style', "float: left")
-            row.appendChild(div)
         }
-        onC("标题", "key",v,'input')
-        onC("类型", "k",data.k,'select')
-        onC("内容", "content",data.content,'input')
-        pnl.appendChild(row)
     }
-    function addTechennicaTemplate(){
+    var inputTypeArr = ['','下拉框','文本框','复选框','单选框']
+    var techTypeArr = ['','中医师','营养师','新生儿医生','技师']
+    function typeFormatter(value) {
+        return techTypeArr[value]
+    }
+    function inputTypeFormatter(value) {
+        return inputTypeArr[value]
+    } 
 
+    function isNewType(resObj){
+        var isNew = true
+        for(var p in resParam){
+            if(resParam[p].type == resObj['type']){
+                resObj['names'] = resParam[p].names
+                isNew = false
+                break;
+            }
+        }
+        return isNew
+    }
+    function getTemplateVariable(){
+        var resObj = {}
+        var varTemp=$("#saveTemp").serializeArray()
+        resObj['type'] = varTemp[0].value
+        
+        var _isNewType = isNewType(resObj)
+        
+        if(_isNewType){
+            var tmp = {}
+            tmp.k=varTemp[2].value
+            tmp.content=varTemp[3].value
+            resObj['names'][varTemp[1].value] = tmp
+            return resObj
+        }else{
+            var tIdx = 0
+            for(var t in resObj['names']){
+                if(modRowIdx==-1){
+                    var tmp = {}
+                    tmp.k=varTemp[2].value
+                    tmp.content=varTemp[3].value
+                    resObj['names'][varTemp[1].value] = tmp
+                    break;
+                }else{
+                    if(tIdx == modRowIdx){
+                        delete resObj['names'][t]
+                        var tmp = {}
+                        tmp.k=varTemp[2].value
+                        tmp.content=varTemp[3].value
+                        resObj['names'][varTemp[1].value] = tmp 
+                        break;
+                    }
+                    tIdx++
+                }
+            }
+        }
+        for(var n in resObj['names']){
+            
+        }
+        return resObj
+    }
+    function saveTemplate(){
+        var _url = ""
+        $("#type").removeAttr("disabled")
+        var postParam = getTemplateVariable()
+        if(isMod){
+            // _url = "http://139.196.238.46:7001/api/modServiceTemplate"
+            _url = "http://localhost:7001/api/modServiceTemplate"
+        }else{
+            // _url = "http://139.196.238.46:7001/api/addServiceTemplate"
+            _url = "http://localhost:7001/api/addServiceTemplate"
+        }
+        var str = JSON.stringify(postParam)
+        $.ajax({
+            type: "POST",
+            url: _url,
+            data: str,
+            dataType:"json",
+            contentType: "application/json; charset=utf-8",
+            error: function (request) {
+                isMod = false
+                alert("提交失败");
+            },
+            success: function (params) {
+                isMod = false
+                if(params.err){
+                    alert("提交失败")
+                }else if(params.ok==1){
+                    for(var p in resParam){
+                        if(resParam[p].type == postParam['type']){
+                            resParam[p].names = postParam.names
+                            break;
+                        }
+                    }
+                    var dataArr = []
+                    resConArr(resParam,dataArr)
+                    $table.bootstrapTable("load",dataArr)
+                    alert("提交成功")
+                    $('#editModal').modal('hide')
+                }
+            }
+        });
+    }
+    function operateFormatter(value, row, index) {
+        return [
+                '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:15px;">删除</button>',
+                '<button class="RoleOfEdit btn btn-default btn-sm" style="margin-right:15px;" >编辑</button>',
+            ].join('');
+    }
+    window.operateEvents = {
+        'click .RoleOfA': function (e, value, row, index) {
+            $.post("http://139.196.238.46:7001/api/delServiceTemplate",{id:row.id},function(params){
+                if(params.err){
+                    alert("删除失败")
+                }else if(params.ok==1){
+                    alert("删除成功")
+                    $('#table').bootstrapTable('remove', {
+                        field: 'id',
+                        values: [row.id]
+                    });
+                }
+            },"json")
+        },
+        'click .RoleOfEdit': function (e, value, row, index) {
+            isMod = true
+            modRowIdx = row.id
+            $('#editModal').modal('show')
+            document.getElementById("type").value = row.type
+            document.getElementById("type").disabled = true
+            document.getElementById("t").value = row.t
+            document.getElementById("k").value = row.k
+            document.getElementById("content").value = row.content || ""
+            document.getElementById("savaTitle").innerHTML = "编辑模板"
+        }
+    };
+    function addTemplate(){
+        modRowIdx = -1
+        $('#editModal').modal('show')
+        document.getElementById("savaTitle").innerHTML = "添加模板"
+        document.getElementById("type").value = 0
+        document.getElementById("type").disabled = false
+        document.getElementById("t").value = ""
+        document.getElementById("k").value = 0
+        document.getElementById("content").value = ""
     }
 </script>
 </body>

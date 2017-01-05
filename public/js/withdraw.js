@@ -3,10 +3,13 @@ var wdId = 0
 $(function(){
     window.parent.onAutoIframeHeight(750)
     $("#submitAlert").click(function(){
-        $.post("http://139.196.238.46:7001/api/reviewPayRecords",{id:wdId,pass:approve},function(){
-            loadWithdraw()
+        $.post("http://139.196.238.46:7001/api/reviewPayRecords",{id:wdId,pass:approve},function(param){
+            if(param.ok==1){
+                loadWithdraw()
+            }else{
+                alert("批准不成功")
+            }
         },"json")
-       
     })
     loadWithdraw()
 })

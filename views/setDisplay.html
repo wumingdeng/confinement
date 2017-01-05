@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,65 +18,245 @@
 </head>
 
 <body style="background-color: transparent">
-<div class="templatemo-content col-1 light-gray-bg">
-    <div class="templatemo-content-widget white-bg">
-        <div class="panel panel-default no-border">
-            <div class="panel-body">
-                <div id="toolbar">
-                    <button id="btn_swiper" class="btn btn-default">添加轮播图片</button>
+    <div class="templatemo-content col-1 light-gray-bg">
+        <div class="templatemo-content-widget white-bg">
+            <div class="panel panel-default no-border">
+                <div class="panel-body">
+                    <div id="toolbar">
+                        <button id="btn_swiper" class="btn btn-primary">添加轮播图片</button>
+                    </div>
+                    <table id="table" class="table table-striped table-bordered templatemo-user-table" data-toggle="table" data-page-list=""
+                        data-height="auto">
+                        <colgroup>
+                            <col style="width:5%">
+                            <col style="width:65%">
+                            <col style="width:5%">
+                            <col style="width:5%">
+                            <col style="width:5%">
+                            <col style="width:15%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th data-field="id"></th>
+                                <th data-field="url" data-formatter="imgFormatter">图片地址</th>
+                                <th data-field="linkAdr" >跳转的地址</th>
+                                <th data-field="idx">播放顺序</th>
+                                <th data-field="showtime">播放时长</th>
+                                <th data-field="place" data-formatter="placeFormatter">对应页面(首页、服务项目ID)</th>
+                                <th data-formatter="operateFormatter" data-events="operateEvents">操作</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
-                <table id="table" class="table table-striped table-bordered templatemo-user-table" data-toggle="table" data-page-list=""
-                       data-height="auto">
-                    <colgroup>
-                        <col style="width:5%">
-                        <col style="width:65%">
-                        <col style="width:5%">
-                        <col style="width:5%">
-                        <col style="width:5%">
-                        <col style="width:15%">
-                    </colgroup>
-                    <thead>
-                    <tr>
-                        <th data-field="id"></th>
-                        <th data-field="url" data-editable="true" data-formatter="k1Formatter">图片地址</th>
-                        <th data-field="linkAdr" data-editable="true" data-formatter="k2Formatter">跳转的地址</th>
-                        <th data-field="idx" data-editable="true" data-formatter="k3Formatter">播放顺序</th>
-                        <th data-field="showtime" data-editable="true" data-formatter="k5Formatter" data-ng-show="false">播放时长</th>
-                        <th data-field="place" data-editable="true" data-formatter="k4Formatter">对应页面(首页、服务项目ID)</th>
-                        <th data-formatter="operateFormatter" data-events="operateEvents">操作</th>
-                    </tr>
-                    </thead>
-                </table>
-                <!--<div id="xsToolbar">
-                    <button id="btn_service" class="btn btn-default">添加服务</button>
-                </div>
-                <table id="xsTable" class="table table-striped table-bordered templatemo-user-table" data-toggle="table" data-page-list=""
-                       data-height="auto">
-                    <thead>
-                    <tr>
-                        <th data-field="id"></th>
-                        <th data-field="iconurl" data-editable="true" data-formatter="addrFormatter">图片地址</th>
-                        <th data-field="place" data-editable="true" data-formatter="idxFormatter">位置</th>
-                        <th data-field="name" data-editable="true" data-formatter="nameFormatter">名称</th>
-                        <th data-field="operate" data-formatter="xsOperateFormatter" data-events="operateEvents">操作</th>
-                    </tr>
-                    </thead>
-                </table>-->
             </div>
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="panel-heading"><h2 class="text-uppercase" id='savaTitle'></h2></div>
+                    <div class="panel-body">
+                        <form class="templatemo-login-form" id="editForm">
+                            <label class="col-lg-2  control-label" style="width: 100%;">上传新图片</label>
+                            <div class="input-group-btn">
+                                <div class="btn btn-file">
+                                    <input id="url" name="url" class="file" type="file" multiple="" data-preview-file-type="img" data-upload-url="uploadFile">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPwd">跳转地址</label>
+                                <input type="text" class="form-control" name="linkAdr" id="linkAdr">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPwd">播放顺序</label>
+                                <input type="text" class="form-control" name="idx" id="idx">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPwd">播放时长</label>
+                                <input type="text" class="form-control" name="showtime" id="showtime">
+                            </div>
+                            <div class="form-group">
+                                对应页面(首页、服务项目号):
+                                <select name="place" id="place">
+                                    <option value="0">首页</option>
+                                    <option value="1">通乳</option>
+                                    <option value="2">挤奶</option>
+                                    <option value="3">少奶</option>
+                                </select>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="commitEdit()">提交</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+        <div class="modal fade" id="removeUserModel" tabindex="-1" role="dialog">
+            <div class="modal-dialog Absolute-Center" style="height: 25%">
+                <div class="modal-content">
+                    <div class="panel-heading"><h2 class="text-uppercase">删除用户</h2></div>
+                    <div class="panel-body">
+                        <h1>真的要删除此人?</h1>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="onCommitDelete()" >确定</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+        </div>
         </div>
     </div>
-</div>
-<!-- JS -->
-<script src="boostrap/js/jquery.min.js"></script>
-<script src="boostrap/js/bootstrap.min.js"></script>
-<script src="boostrap/js/bootstrap-table.js"></script>
-<script src="js/webLogic.js"></script>
-<script src="boostrap/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
-<script src="js/modify-project-table.js"></script>
-<script src="boostrap/bootstrap-table-zh-CN.js"></script>
-<script src="js/fileinput.min.js"></script>
-<script>
+    <!-- JS -->
+    <script src="boostrap/js/jquery.min.js"></script>
+    <script src="boostrap/js/bootstrap.min.js"></script>
+    <script src="boostrap/js/bootstrap-table.js"></script>
+    <script src="js/webLogic.js"></script>
+    <script src="boostrap/js/templatemo-script.js"></script>
+    <!-- Templatemo Script -->
+    <script src="boostrap/bootstrap-table-zh-CN.js"></script>
+    <script src="js/fileinput.min.js"></script>
+    <script>
     window.parent.onAutoIframeHeight(1000) //设置Iframe的高度
+
+
+    var isMod = false
+    var modRow = {}
+    $(function () {
+        var _Id = 0
+        var $table = $('#table'),
+            $button = $('#btn_swiper');
+
+        $button.click(function () {
+            isMod = false
+            onSave()
+        });
+        $table.bootstrapTable('hideColumn', 'id');
+
+        $.get("http://139.196.238.46:7001/api/getswipe",{},function(params){
+            swiperData = params.ok
+            $table.bootstrapTable("load",swiperData)
+        })
+        
+    });
+
+    function operateFormatter(value, row, index) {
+        return [
+            '<button type="button" class="RoleOfA btn btn-default  btn-sm" style="margin-right:15px;">删除</button>',
+            '<button type="button" class="RoleOfB btn btn-primary  btn-sm" style="margin-right:15px;">编辑</button>',
+        ].join('');
+    }
+
+    function imgFormatter(value, row, index){
+        return '<img src="/img/header.jpg" width="80px">'
+    }
+    var placeArr = ['首页','通乳','挤奶','少乳','塑性']
+    function placeFormatter(value, row, index){
+        return placeArr[value]
+    }
+    function onCommitDelete(){
+        $.post("http://139.196.238.46:7001/api/delswipe",{id:modRow.id},function(params){
+            if(params.err){
+                alert("删除失败")
+            }else if(params.ok==1){
+                alert("删除成功")
+                $('#table').bootstrapTable('remove', {
+                    field: 'id',
+                    values: [modRow.id]
+                });
+            }
+        },"json")
+    }
+    function onDelete(){
+        $('#removeUserModel').modal('show')
+    }
+    function commitEdit(){
+        var _url =""
+        var postParams={}
+        var obj = {}
+        obj['url'] = document.getElementById("url").value
+        // obj['linkAdr'] = document.getElementById("linkAdr").value
+        // obj['idx'] = document.getElementById("idx").value
+        obj['place'] = Number(document.getElementById("place").value)
+        if(isMod){
+            postParams['id'] = Number(modRow.id)
+            obj['showtime'] = Number(document.getElementById("showtime").value)
+            postParams['mods'] = obj
+            _url = "http://localhost:7001/api/modswipe"
+            // _url = "http://139.196.238.46:7001/api/modswipe"
+        }else{
+            obj['show'] = Number(document.getElementById("showtime").value)
+            postParams = obj
+            _url = "http://localhost:7001/api/addswipe"
+            // _url = "http://139.196.238.46:7001/api/addswipe"
+        }
+        var str = JSON.stringify(postParams)
+        $.ajax({
+            type: "POST",
+            url: _url,
+            data: str,
+            dataType:"json",
+            contentType: "application/json; charset=utf-8",
+            error: function (request) {
+                alert("提交失败");
+            }, 
+            success: function (params) {
+                if(isMod){
+                    if(params.err){
+                        alert("提交失败")
+                    }else if(params.ok==1){
+                        alert("提交成功")
+                        $('#editModal').modal('hide')
+                    }
+                }else{
+                    if(params.err){
+                        alert("提交失败")
+                    }else{
+                        var res =  params.ok
+                        $('#table').bootstrapTable('append', res);
+                        alert("提交成功")
+                        $('#editModal').modal('hide')
+                    }
+                }
+                
+            }
+        });
+    }
+    function onSave(row){
+        $('#editModal').modal('show')
+        if(isMod){
+            document.getElementById("savaTitle").innerHTML = "编辑模板"
+            document.getElementById("linkAdr").value = row.linkAdr || ""
+            document.getElementById("url").value = ""
+            document.getElementById("idx").value = row.idx||""
+            document.getElementById("place").value = row.place||""
+            document.getElementById("showtime").value = row.showtime||""
+        }else{
+            document.getElementById("savaTitle").innerHTML = "添加模板"
+            document.getElementById("url").value = ""
+            document.getElementById("linkAdr").value = ""
+            document.getElementById("idx").value = ""
+            document.getElementById("place").value = ""
+            document.getElementById("showtime").value = ""
+        }
+    }
+    window.operateEvents = {
+        'click .RoleOfA': function (e, value, row, index) {
+            modRow = row
+            onDelete()
+        },
+        'click .RoleOfB': function (e, value, row, index) {
+            isMod = true
+            modRow = row
+            onSave(row)
+        }
+    };
+
 </script>
 </body>
+
 </html>
