@@ -4,13 +4,14 @@
 /**
  * Created by Fizzo on 16/12/8.
  */
+var g_url = getCookies("_url")
 $(function() {
     window.parent.onAutoIframeHeight(800)
 
     $('#orderTable').bootstrapTable('destroy')
     $('#orderTable').bootstrapTable({
         method: 'post',
-        url: 'http://139.196.238.46:7001/api/getOrders',
+        url: g_url+'api/getOrders',
         sidePagination: "server",
         dataType: "json",
         pageSize:  10,
@@ -34,13 +35,13 @@ function rmbFormatter(value, row, index){
 
 function sFormatter(value, row, index){
     switch(value){
-        case "0":
+        case 0:
             return "未派单";
-        case "1":
+        case 1:
             return "完成";
-        case "2":
+        case 2:
             return "关闭";
-        case "3":
+        case 3:
             return "派单中";
         default:
             return "";

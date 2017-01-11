@@ -27,15 +27,20 @@
                             <th data-field="name">技师名称</th>
                             <th data-field="is_recommend" data-formatter="tjFormatter">是否推荐</th>
                             <th data-field="review_status" data-formatter="asFormatter">审核状态</th>
-                            <th data-field="us" data-formatter="usFormatter">账号状态</th>
-                            <th data-field="dt" data-formatter="rtFormatter">注册时间</th>
-                            <th data-field="at" data-formatter="atFormatter">最新审批时间</th>
+                            <th data-field="account_status" data-formatter="usFormatter">账号状态</th>
+                            <th data-field="created_time" data-formatter="rtFormatter">注册时间</th>
+                            <th data-field="at" data-formatter="rtFormatter">最新审批时间</th>
                             <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">操作
                             </th>
                         </tr>
                         </thead>
                     </table>
                 </div>
+                <!--<div class="text-right">
+                        <button id="addNew" class="btn btn-success">
+                            <i class="glyphicon glyphicon-plus"></i>添加技师
+                        </button>
+                </div>-->
             </div>
             <!-- 模态框（Modal） -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -53,7 +58,6 @@
         </div>
     </div>
 </div>
-
 <script src="boostrap/js/jquery.min.js"></script>
 <script src="boostrap/js/bootstrap.min.js"></script>
 <script src="boostrap/js/bootstrap-table.js"></script>

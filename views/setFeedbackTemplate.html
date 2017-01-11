@@ -194,9 +194,8 @@
                 }
             }
         }
-        for(var n in resObj['names']){
-            
-        }
+        var ddd = JSON.stringify(resObj['names']) 
+        resObj['names'] = ddd
         return resObj
     }
     function saveTemplate(){
@@ -226,6 +225,7 @@
                 if(params.err){
                     alert("提交失败")
                 }else if(params.ok==1){
+                    postParam.names = JSON.parse(postParam.names)
                     for(var p in resParam){
                         if(resParam[p].type == postParam['type']){
                             resParam[p].names = postParam.names

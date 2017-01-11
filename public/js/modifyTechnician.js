@@ -2,6 +2,7 @@
  * Created by Fizzo on 16/12/8.
  */
 var isModify = false
+var g_url = getCookie('_url')
 var g_argPost = {}
 $(function(){
     window.parent.onAutoIframeHeight(2000)
@@ -14,25 +15,42 @@ $(function(){
         var temp = tmp1.split("&")[0]
         var rowStr = temp.split("=")[1];
         g_argPost = JSON.parse(rowStr)
+        setInputValue(g_argPost) 
     }
-    setInputValue(g_argPost) 
 })
 function onPostForm() {
+    // var photourl=document.getElementsByName("photourl")[0]
     var postData =  $("#modifyForm").serializeArray()
-    var values = {};
+    var values = {}
     for (var item in postData) {
+        // values.append(postData[item].name,postData[item].value)
         values[postData[item].name] = postData[item].value;
     }
-    var param = {id:g_argPost.id,p:values}
-    var str = JSON.stringify(param)
+    var fdata = new FormData();
+    fdata.append("photourl",document.getElementById("upload").files[0])
+    fdata.append("nc",document.getElementById("normal_cert").files[0])
+    fdata.append("ec",document.getElementById("expert_cert").files[0])
+    fdata.append("wxid",g_argPost.wxid)
+    fdata.append("id",g_argPost.id)
+    var str = JSON.stringify(values)
+    fdata.append("p",str)
+    // var param = {id:g_argPost.id,p:values}
+    var _url = ""
+    if(isModify){
+        _url=g_url+"modWorker"
+    }else{
+        _url=g_url+"addWorker”
+    }
     $.ajax({
         cache: true,
         type: "POST",
-        url: 'http://139.196.238.46:7001/api/modWorker',
-        data: str,
+        url: g_url+'modWorker',
+        data: fdata,
         async: false,
         dataType:"json",
-        contentType: "application/json; charset=utf-8",
+        // contentType: "application/json; charset=utf-8",
+        contentType: false,  
+        processData: false,  
         error: function (request) {
             alert("修改失败");
         },
@@ -40,8 +58,7 @@ function onPostForm() {
             if(data.err == 999){
                 alert('修改失败')
             }else {
-                var myurl = "";
-                window.location.assign(encodeURI(myurl));
+                alert('修改成功')
             }
         }
     });
@@ -49,17 +66,17 @@ function onPostForm() {
 
 function setInputValue(argPost) {
     document.getElementById("tel").value = argPost.tel || "";
-    document.getElementById("photourl").value = argPost.photourl || "";
     document.getElementById("name").value = argPost.name || "";
     document.getElementById("sex").value = argPost.sex || "";
     document.getElementById("position").value = argPost.position || "";
     document.getElementById("age").value = argPost.age || "";
     document.getElementById("expyears").value = argPost.expyears || "";
-    document.getElementById("normal_cert").value = argPost.normal_cert || "";
-    document.getElementById("expert_cert").value = argPost.expert_cert || "";
     document.getElementById("address").value = argPost.address || "";
     document.getElementById("keshi").value = argPost.keshi || "";
     document.getElementById("content").value = argPost.content || "";
+    document.getElementById('preview').src = g_url+g_argPost.photourl ||"";
+    document.getElementById('expert_cert_preview').src = g_url+g_argPost.expert_cert||"";
+    document.getElementById('normal_cert_preview').src = g_url+g_argPost.normal_cert||"";
 }
 
 //复写重置方法

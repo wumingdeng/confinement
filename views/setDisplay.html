@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="boostrap/css/bootstrap-table.min.css">
     <link href="boostrap/css/templatemo-style.css" rel="stylesheet">
     <link href="boostrap/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/fileinput.min.css" rel="stylesheet">
     <link rel='stylesheet' , href='css/qunit-1.22.0.css'>
     <link href="css/modalExtra.css" rel="stylesheet">
 </head>
@@ -59,7 +58,8 @@
                             <label class="col-lg-2  control-label" style="width: 100%;">上传新图片</label>
                             <div class="input-group-btn">
                                 <div class="btn btn-file">
-                                    <input id="url" name="url" class="file" type="file" multiple="" data-preview-file-type="img" data-upload-url="uploadFile">
+                                    <input id="url" name="url" class="file" type="file">
+                                    <img id="perview" src="url" width="100px">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -119,11 +119,11 @@
     <script src="boostrap/js/templatemo-script.js"></script>
     <!-- Templatemo Script -->
     <script src="boostrap/bootstrap-table-zh-CN.js"></script>
-    <script src="js/fileinput.min.js"></script>
+    <!--<script src="js/fileinput.min.js"></script>-->
     <script>
     window.parent.onAutoIframeHeight(1000) //设置Iframe的高度
 
-
+    g_url=getCookies("_url")
     var isMod = false
     var modRow = {}
     $(function () {
@@ -137,7 +137,7 @@
         });
         $table.bootstrapTable('hideColumn', 'id');
 
-        $.get("http://139.196.238.46:7001/api/getswipe",{},function(params){
+        $.get(g_url+"api/getswipe",{},function(params){
             swiperData = params.ok
             $table.bootstrapTable("load",swiperData)
         })
@@ -186,12 +186,12 @@
             postParams['id'] = Number(modRow.id)
             obj['showtime'] = Number(document.getElementById("showtime").value)
             postParams['mods'] = obj
-            _url = "http://localhost:7001/api/modswipe"
+            _url = g_url+"api/modswipe"
             // _url = "http://139.196.238.46:7001/api/modswipe"
         }else{
             obj['show'] = Number(document.getElementById("showtime").value)
             postParams = obj
-            _url = "http://localhost:7001/api/addswipe"
+            _url = g_url+"api/addswipe"
             // _url = "http://139.196.238.46:7001/api/addswipe"
         }
         var str = JSON.stringify(postParams)

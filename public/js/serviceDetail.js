@@ -2,23 +2,24 @@
  * Created by Fizzo on 16/12/8.
  */
 var isModify = false 
+var g_url=getCookie("_url")
 var g_argPost = {}
 $(function(){
-    window.parent.onAutoIframeHeight(1700)
+    window.parent.onAutoIframeHeight(2000)
     
     var url = decodeURI(location.href);
-    var tmp1 = url.split("?")[1];
-
-    if (tmp1) {
+    var p_1 = url.indexOf("?")
+    if(p_1>=0){
+        var params = url.substr(p_1+1,url.length)
+        var p_2 = params.indexOf("=")
+        var rowStr = params.substr(p_2+1,params.length)
         isModify = true
-        var temp = tmp1.split("&")[0]
-        var rowStr = temp.split("=")[1];
         g_argPost = JSON.parse(rowStr)
         setInputValue(g_argPost)
     }
 
     function setInputValue(argPost) {
-        document.getElementById("desc_icon").src = argPost.desc_icon || "",
+        document.getElementById("preview").src = g_url+argPost.desc_icon,
         document.getElementById("name").value = argPost.name || "";
         document.getElementById("desc_content").value = argPost.desc_content || "";
         document.getElementById("origin_price").value = argPost.origin_price || 0;
@@ -45,12 +46,18 @@ function onPostForm() {
     }
     var param = {sid:g_argPost.id,param:values}
     var str = JSON.stringify(param)
+
+    var _url = ""
+    if(isModify){
+        _url=g_url+'api/modService'
+    }else{
+        _url=g_url+"api/createService"
+    }
     $.ajax({
         cache: true,
         type: "POST",
-        url: 'http://139.196.238.46:7001/api/modService',
+        url: _url,
         data: str,
-        async: false,
         dataType:"json",
         contentType: "application/json; charset=utf-8",
         error: function (request) {
@@ -60,14 +67,53 @@ function onPostForm() {
             if(data.err == 999){
                 alert('修改失败')
             }else {
-                var myurl = "";
-                window.location.assign(encodeURI(myurl));
+                alert('修改成功')
             }
         }
     });
 }
+// function onPostForm() {
+//     var postData =  $("#serviceForm").serializeArray()
+//     var values = {};
+//     for (var item in postData) {
+//         values[postData[item].name] = postData[item].value;
+//     }
+//     // var param = {sid:g_argPost.id,param:values}
+
+//     var fdata = new FormData();
+//     fdata.append("desc_icon",document.getElementById("desc_icon").files[0])
+//     fdata.append("sid",g_argPost.id)
+//     var str = JSON.stringify(values)
+//     fdata.append("param",str)
+
+//     var _url = ""
+//     if(isModify){
+//         _url=g_url+'api/modService'
+//     }else{
+//         _url=g_url+"createService"
+//     }
+//     $.ajax({
+//         type: "POST",
+//         url: _url,
+//         data: fdata,
+//         dataType:"json",
+//         contentType: false,
+//         processData: false, 
+//         error: function (request) {
+//             alert("修改失败");
+//         },
+//         success: function (data) {
+//             if(data.err == 999){
+//                 alert('修改失败')
+//             }else {
+//                 alert('修改成功')
+//             }
+//         }
+//     });
 
 
+    
+// }
 
 //复写重置方法
 function onRest() {

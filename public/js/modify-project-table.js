@@ -7,6 +7,7 @@ var swiperData = []
 var servicesData = []
 var addYearCar = 0
 var addService = 0
+var g_url = getCookies("_url")
 $(function () {
     var _Id = 0
     var $table = $('#table'),
@@ -29,7 +30,7 @@ $(function () {
     // $('#xsTable').bootstrapTable('hideColumn',"id");
     $table.bootstrapTable('hideColumn', 'id');
 
-    $.get("http://139.196.238.46:7001/api/getswipe",{},function(params){
+    $.get(g_url+"api/getswipe",{},function(params){
         swiperData = params.ok
         $table.bootstrapTable("load",swiperData)
     })
@@ -128,7 +129,7 @@ window.operateEvents = {
             addYearCar--
             swiperData.splice(index,1)
         }else{
-            $.post("http://139.196.238.46:7001/api/delswipe",{id:row.id},function(params){
+            $.post(g_url+"api/delswipe",{id:row.id},function(params){
             if(params.err){
                 alert("删除失败")
             }else if(params.ok==1){
@@ -149,10 +150,10 @@ window.operateEvents = {
         postData['id'] = swiperData[index]['id']
         var postUrl = ""
         if(postData['id']>0){
-            postUrl =  "http://139.196.238.46:7001/api/modswipe"
+            postUrl =  g_url+"api/modswipe"
         }else{
             delete postData.id
-            postUrl =  "http://139.196.238.46:7001/api/addswipe"
+            postUrl = g_url+"api/addswipe"
         }
         $.post(postUrl,postData,function(params){
             if(params.err){
@@ -174,7 +175,7 @@ window.operateEvents = {
              servicesData.splice(index,1)
             addService--
         }else{
-            $.post("http://139.196.238.46:7001/api/delswipe",{id:row.id},function(params){
+            $.post(g_url+"api/delswipe",{id:row.id},function(params){
             if(params.err){
                 alert("删除失败")
             }else if(params.ok==1){
@@ -194,10 +195,10 @@ window.operateEvents = {
         postData['id'] = swiperData[index]['id']
         var postUrl = ""
         if(postData['id']>0){
-            postUrl =  "http://139.196.238.46:7001/api/modswipe"
+            postUrl = g_url+"api/modswipe"
         }else{
             delete postData.id
-            postUrl =  "http://139.196.238.46:7001/api/addswipe"
+            postUrl =  g_url+"api/addswipe"
         }
         $.post(postUrl,postData,function(params){
             if(params.err){

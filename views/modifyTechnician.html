@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="boostrap/css/bootstrap-table.min.css">
     <link href="boostrap/css/templatemo-style.css" rel="stylesheet">
     <link href="boostrap/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/fileinput.min.css" rel="stylesheet">
+    <!--<link href="css/fileinput.min.css" rel="stylesheet">-->
     <link rel='stylesheet' , href='css/qunit-1.22.0.css'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -28,15 +28,11 @@
                             <label class="col-lg-2  control-label" style="width: 100%;">肖像上传</label>
                             <div class="input-group-btn">
                                 <div class="btn btn-file">
-                                    <img src='img/header.jpg' id="photourl" name="head">
+                                    <input id="upload" class="file" type="file">
+                                    <img id="preview" src="" height="200px">
                                 </div>
                             </div>
-                            <div class="input-group-btn">
-                                <div class="btn btn-file">
-                                    <input name="photourl" class="file" type="file" multiple="" data-preview-file-type="any" data-upload-url="#"
-                                        data-preview-file-icon="">
-                                </div>
-                            </div>
+                           
                         </div>
                         <div class="row form-group">
                             <label class="col-lg-2 control-label" style="width: 100%;">姓名</label>
@@ -89,29 +85,23 @@
                             <label class="col-lg-2 control-label" style="width: 100%;">普通认证</label>
                             <div class="input-group-btn">
                                 <div class="btn btn-file">
-                                    <img src='img/header.jpg' id="normal_cert">
+                                    <!--<img src='img/header.jpg' id="normal_cert">-->
+                                    <input id="normal_cert" class="file" type="file">
+                                    <img id="normal_cert_preview" src="" height="200px">
                                 </div>
                             </div>
-                            <div class="input-group-btn">
-                                <div class="btn btn-file">
-                                    <input name="normal_cert" class="file" type="file" multiple="" data-preview-file-type="any" data-upload-url="#"
-                                        data-preview-file-icon="">
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="row form-group">
                             <label class="col-lg-2 control-label" style="width: 100%;">权威认证</label>
                             <div class="input-group-btn">
                                 <div class="btn btn-file">
-                                    <img src='img/header.jpg' id="expert_cert">
+                                    <!--<img src='img/header.jpg' id="expert_cert">-->
+                                    <input id="expert_cert" class="file" type="file">
+                                    <img id="expert_cert_preview" src="" height="200px">
                                 </div>
                             </div>
-                            <div class="input-group-btn">
-                                <div class="btn btn-file">
-                                    <input name="expert_cert" class="file" type="file" multiple="" data-preview-file-type="any" data-upload-url="#"
-                                        data-preview-file-icon="">
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="row form-group">
                             <label class="col-lg-2 control-label" style="width: 100%;">地址</label>
@@ -200,10 +190,26 @@
     <script src="boostrap/js/templatemo-script.js"></script>
     <!-- Templatemo Script -->
     <script src="js/cookieUnit.js"></script>
-    <script src="js/fileinput.min.js"></script>
-    <script src="js/locales/zh.js"></script>
+    <!--<script src="js/fileinput.min.js"></script>-->
+    <!--<script src="js/locales/zh.js"></script>-->
     <script src="js/modifyTechnician.js"></script>
-
+    <script>
+        $('#upload').change(function(){
+            var f = document.getElementById('upload').files[0];
+            var src = window.URL.createObjectURL(f);
+            document.getElementById('preview').src = src;
+        });
+        $('#expert_cert').change(function(){
+            var f = document.getElementById('expert_cert').files[0];
+            var src = window.URL.createObjectURL(f);
+            document.getElementById('expert_cert_preview').src = src;
+        });
+        $('#normal_cert').change(function(){
+            var f = document.getElementById('normal_cert').files[0];
+            var src = window.URL.createObjectURL(f);
+            document.getElementById('normal_cert_preview').src = src;
+        });
+    </script>
 </body>
 
 </html>

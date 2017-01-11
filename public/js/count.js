@@ -16,6 +16,10 @@ $(function() {
         pageSize:  10,
         striped: true,
         showColumns:true,
+        queryParams:function(params){
+            params.review_status = 1
+            return params
+        },
         onLoadSuccess: function () {
         },
         onResetView: function () {
@@ -51,13 +55,13 @@ function rmbFormatter(value, row, index){
 
 function sFormatter(value, row, index){
     switch(value){
-        case "0":
+        case 0:
             return "未派单";
-        case "1":
+        case 1:
             return "完成";
-        case "2":
+        case 2:
             return "关闭";
-        case "3":
+        case 3:
             return "派单中";
         default:
             return "";

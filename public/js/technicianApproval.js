@@ -46,13 +46,13 @@ function onSuccess(row) {
 
 function asFormatter(value, row, index){
     switch(value){
-        case "0":
+        case 0:
             return "资料未完善";
-        case "1":
+        case 1:
             return "资料完善未审批";
-        case "2":
+        case 2:
             return "资料已完善";
-        case "3":
+        case 3:
             return "审核未通过";
         default:
             return "";
@@ -61,9 +61,9 @@ function asFormatter(value, row, index){
 
 function usFormatter(value, row, index){
     switch(value){
-        case "0":
+        case 0:
             return "正常";
-        case "1":
+        case 1:
             return "冻结";
         default:
             return "";
@@ -72,18 +72,15 @@ function usFormatter(value, row, index){
 
 function tjFormatter(value,row,index){
     switch(value){
-        case "0":
+        case 0:
             return "否";
-        case "1":
+        case 1:
             return "是";
         default:
             return "";
     }
 }
 
-function rmbFormatter(value,row,index){
-    return "￥"+ value +"元"
-}
 function operateFormatter(value, row, index) {
     var qz = getCookie('right')
     return [
@@ -92,12 +89,10 @@ function operateFormatter(value, row, index) {
         '<button class="enter btn btn-primary  btn-sm">审批</button>',
     ].join('');
 }
-function rtFormatter(value, row, index) {
-    var newTime = new Date(Number(value));
-    return newTime.getFullYear() + "-" + (newTime.getMonth() + 1) + "-" + newTime.getDate()
-}
+
 function atFormatter(value, row, index) {
-    var newTime = new Date(Number(value));
+    var time = value || ""
+    var newTime = new Date(Number(time));
     return newTime.getFullYear() + "-" + (newTime.getMonth() + 1) + "-" + newTime.getDate()
 }
 

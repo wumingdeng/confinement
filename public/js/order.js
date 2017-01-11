@@ -3,14 +3,15 @@
  */
 var selectOid = ""
 var selectWid = ""
+var g_url=getCookie('_url')
 $(function() {
     window.parent.onAutoIframeHeight(800)
 
     $('#orderTable').bootstrapTable('destroy')
     $('#orderTable').bootstrapTable({
-        method: 'get',
-        // url: '/dataJson/order.json',
-        url: 'http://139.196.238.46:7001/api/getOrdersNeedHandle',
+        method: 'post',
+        // url: 'http://139.196.238.46:7001/api/getOrdersNeedHandle',
+        url: 'http://localhost:7001/api/getOrdersNeedHandle',
         sidePagination: "server",
         dataType: "json",
         pageSize:  10,
@@ -23,7 +24,8 @@ $(function() {
     })
 
     $("#submitAlert").click(function(){
-        $.post("http://139.196.238.46:7001/api/assignWorker",{oid:selectOid,wid:selectWid},function(data){
+        // $.post("http://139.196.238.46:7001/api/assignWorker",{oid:selectOid,wid:selectWid},function(data){
+        $.post(g_url+"api/assignWorker",{oid:selectOid,wid:selectWid},function(data){
             $("#alertSumbmit").modal('hide')
         },"json")
        
@@ -36,7 +38,8 @@ $(function() {
         $('#tTable').bootstrapTable('destroy')
         $('#tTable').bootstrapTable({
             method: 'post',
-            url: 'http://139.196.238.46:7001/api/getWorkerByCondition',
+            url: g_url+'api/getWorkerByCondition',
+            // url: 'http://localhost:7001/api/getWorkerByCondition',
             sidePagination: "server",
             dataType: "json",
             pageSize:  10,
@@ -45,9 +48,12 @@ $(function() {
                 param.name=name
                 param.goodAt=ga
                 return param
-            }
+            },
             striped: true,
             onLoadSuccess: function () {
+            },
+            onLoadError:function(){
+                alert("获取数据失败")
             },
             onResetView: function () {
             },
@@ -55,6 +61,7 @@ $(function() {
                 window.parent.document.documentElement.scrollTop = window.parent.document.body.scrollTop = 0
                 $('#changeTechnician').modal('hide')
                 document.getElementById("sendTN").innerHTML ="你确定为"+ row.name+"派发该订单";
+                selectWid = row.wid
                 $("#alertSumbmit").modal('show')
             }
         })
@@ -74,13 +81,13 @@ function rmbFormatter(value, row, index){
 
 function sFormatter(value, row, index){
     switch(value){
-        case "0":
+        case 0:
             return "未派单";
-        case "1":
+        case 1:
             return "完成";
-        case "2":
+        case 2:
             return "关闭";
-        case "3":
+        case 3:
             return "派单中";
         default:
             return "";

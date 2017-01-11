@@ -20,14 +20,26 @@
                            data-page-list="[10]"
                            data-pagination="true"
                            data-height="auto">
+                        <colgroup>
+                            <col style="width:5%">
+                            <col style="width:10%">
+                            <col style="width:25%">
+                            <!--<col style="width:5%">-->
+                            <col style="width:5%">
+                            <col style="width:5%">
+                            <col style="width:15%">
+                            <col style="width:20%">
+                            <col style="width:15%">
+                        </colgroup>
                         <thead>
+                        
                         <tr>
-                            <th data-field="id">服务项目ID</th>
+                            <th data-field="id">服务号</th>
                             <th data-field="name">服务名称</th>
-                            <th data-field="desc_content">服务内容</th>
-                            <th data-field="origin_price" data-formatter="rmbFormatter">院线服务费用</th>
+                            <th data-field="desc_content" data-formatter='contentForrmate'>服务内容</th>
+                            <!--<th data-field="origin_price" data-formatter="rmbFormatter">院线服务费用</th>-->
                             <th data-field="cur_price" data-formatter="rmbFormatter">当前服务费用</th>
-                            <th data-field="desc_fit" data-formatter="groupFormatter">适用人群</th>
+                            <th data-field="desc_fit">适用人群</th>
                             <th data-field="desc_service_time">服务时长</th>
                             <th data-field="desc_service_scale">服务范围</th>
                             <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">操作
@@ -66,5 +78,16 @@
 <script src="boostrap/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 <script src="js/cookieUnit.js"></script>
 <script src="js/service.js"></script>
+<script>
+
+    function contentForrmate(value, row, index){
+        if(value){
+            var str = value.substr(0, 49)
+            return str
+        }else{
+            return ""
+        }
+    }
+</script>
 </body>
 </html>

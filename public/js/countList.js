@@ -16,10 +16,10 @@ $(function() {
         pageSize:  10,
         striped: true,
         search:true,
-        // queryParams:function(params){
-        //     params.wid = 1
-        //     return params
-        // },
+        queryParams:function(params){
+            params.review_status = 0
+            return params
+        },
         searchOnEnterKey:true,
         showColumns:true,
         onLoadSuccess: function () {
